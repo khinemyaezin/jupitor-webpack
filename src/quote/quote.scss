@@ -77,6 +77,8 @@ main {
       grid-column-end: 5;
       grid-row-start: 3;
       grid-row-end: 4;
+      padding: 1rem;
+      background-color: $light;
     }
     td.td-resolve {
       grid-column-start: 4;

@@ -12,7 +12,7 @@ export function runHeaderControl() {
 }
 export function formatDate(jsdate) {
   const aMoment = moment(jsdate);
-  return aMoment.format("DD MM YYYY");
+  return aMoment.format("DD / MM / YYYY");
 }
 
 export function getStartOfDay(date) {

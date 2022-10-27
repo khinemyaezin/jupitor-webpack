@@ -10,7 +10,7 @@ import {
 import { FirebaseInit } from "../utility/firebase";
 import QuoteService from "../utility/quote-query";
 import "bootstrap/js/dist/collapse";
-
+import 'bootstrap/js/dist/offcanvas';
 import { easepick, RangePlugin, TimePlugin } from "@easepick/bundle";
 import Dropdown from "bootstrap/js/dist/dropdown";
 
@@ -101,6 +101,9 @@ function prepareRow(quote, index) {
           <input class="form-check-input" type="checkbox" id="resolve-${
             quote.docId
           }" ${quote.resolve ? "checked" : ""} query-disabled-btn>
+          <label class="d-block d-md-none" for="resolve-${
+            quote.docId
+          }">Resolve</label>
       </div>
     </td>`
   );

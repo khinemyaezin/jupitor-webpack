@@ -110,6 +110,11 @@ $placeholder-color: $gray-500;
     display: block;
     height: calc(var(--header-inner-height) - 10px);
   }
+  @include media-breakpoint-down(sm) {
+    .btn-offcanvas-dismiss {
+      color: rgb(0, 0, 0);
+    }
+  }
 }
 .header-navigation .header-item > a {
   color: whitesmoke;
@@ -131,6 +136,7 @@ $placeholder-color: $gray-500;
 
 .header.header-transparent {
   background-color: transparent;
+  
 }
 .header.header-small {
   background-color: rgba(0, 0, 0, 0.9);
@@ -157,7 +163,7 @@ $placeholder-color: $gray-500;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 20px;
+    right: 20px;
     background-color: transparent;
     color: white;
     outline: none;
