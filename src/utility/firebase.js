@@ -20,6 +20,11 @@ import {
   endBefore,
   limitToLast,
 } from "firebase/firestore";
+const {
+  initializeAppCheck,
+  ReCaptchaV3Provider,
+} = require("firebase/app-check");
+
 import { Quote } from "./model-quote";
 
 const pageSize = 10;
@@ -37,6 +42,7 @@ export class FirebaseInit {
   };
   #app = null;
   #auth = null;
+  #appcheck = null;
   #db = null;
   #currentUser = null;
 
@@ -44,6 +50,13 @@ export class FirebaseInit {
     this.#app = initializeApp(this.firebaseConfig);
     this.#auth = getAuth(this.#app);
     this.#db = getFirestore(this.#app);
+
+    this.#appcheck = initializeAppCheck(this.#app, {
+      provider: new ReCaptchaV3Provider(
+        "6Lczxb0iAAAAALnYCEJFEj6vNq2EViFO7ZBdCebo"
+      ),
+      isTokenAutoRefreshEnabled: true,
+    });
   }
 
   get getCurrentuser() {
@@ -121,7 +134,7 @@ export class FirebaseInit {
   }
 
   onUpdate(collectionName, docId, updateObj) {
-    let docRef = doc(this.#db, collectionName , docId);
+    let docRef = doc(this.#db, collectionName, docId);
     return updateDoc(docRef, updateObj);
   }
 

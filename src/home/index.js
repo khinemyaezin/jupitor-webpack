@@ -7,7 +7,7 @@ import Scrollax from "scrollax";
 import Aos from "aos";
 import { runHeaderControl } from "../utility/main";
 import {FirebaseInit} from '../utility/firebase';
-
+import 'bootstrap/js/dist/offcanvas';
 import { Quote } from "../utility/model-quote";
 
 import jsonUser from "../data-json/user-info.json";
@@ -107,7 +107,14 @@ function createPartners() {
   const list = jsonPartner.partners;
   for (let data of list) {
     const col = $.parseHTML(
-      `<div class="col"><div class="d-flex mb-4 flex-column gap-3 justify-content-start"><div><img class="me-3" src="${data.image}" alt="" height="50" width:"auto"> </div><h5>${data.name}</h5> </div></div>`
+      `<div class="col">
+        <div class="d-flex mb-4 flex-column gap-3 justify-content-start">
+          <div>
+            <img class="me-3" src="${data.image}" alt="" height="50" width:"auto"> 
+          </div>
+          <h5>${data.name}</h5> 
+        </div>
+      </div>`
     );
     const learnMoreBtn = $.parseHTML(
       `<div> <a class="btn btn-outline-primary " href="${data.link}">Learn more</a> </div>`
@@ -177,4 +184,13 @@ function prepareFooter() {
   $("footer #footer-email").attr("href", `mailto:${jsonUser.email}`);
 
   $("footer #footer-phone").text(jsonUser.phone);
+  $("footer #footer-phone").attr("href", `tel:${jsonUser.phone}`);
+
+  for (let social of jsonUser.socials) {
+    $("footer #hero-socials").append(
+      $.parseHTML(
+        `<a class="${social.icon} text-muted text-decoration-none social-icons" href="${social.href}"></a>`
+      )
+    );
+  }
 }

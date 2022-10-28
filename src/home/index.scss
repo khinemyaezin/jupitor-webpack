@@ -1,8 +1,5 @@
 @import "../style.scss";
 
-main {
-  overflow-x: hidden;
-}
 section {
   padding: 4rem 0 4rem 0;
 }
@@ -13,7 +10,7 @@ section {
   }
 }
 img {
-  //animation: popup-keyframe 0.75s 0.5s backwards;
+  animation: popup-keyframe 0.75s 0.5s backwards;
 }
 .jarallax {
   position: relative;
@@ -69,7 +66,7 @@ img {
       z-index: 1;
       max-width: 100%;
       height: auto;
-      transform: scale(0.9);
+      transform: scale(0.8);
     }
     svg {
       transform: rotate(0.03turn) translateX(100%) scaleY(-1);
@@ -431,6 +428,8 @@ img {
 }
 
 .gallery {
+  background-color: $black;
+  color: $white;
   .grid {
     background: transparent;
   }
@@ -475,7 +474,7 @@ img {
     }
     img {
       @include media-breakpoint-up(lg) {
-        transform: scale(0.8);
+        //transform: scale(0.8);
         width: 100%;
       }
     }
@@ -491,11 +490,100 @@ img {
     position: relative;
     transform: translate(60%, -10px);
   }
+  .shape {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    pointer-events: none;
+  }
+
+  .shape-parent {
+    position: relative;
+    z-index: 0;
+  }
+  .ms-n40 {
+    margin-left: -40px !important;
+  }
+  .mt-n40 {
+    margin-top: -40px !important;
+  }
+  .ms-70 {
+    margin-left: 70px !important;
+  }
+  .pb-75 {
+    padding-bottom: 75px !important;
+  }
+  .image-container {
+    --img-height: 80%;
+    transform: translateY(0px);
+    transition-duration: 500ms;
+    opacity: 1;
+    &::before {
+      content: "";
+      display: block;
+      padding-top: var(--img-height);
+    }
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-family: "object-fit: cover";
+      -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+  .background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+
+    .background-color {
+      background-color: $primary;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      -webkit-transition: background-color 150ms linear;
+      transition: background-color 150ms linear;
+      will-change: background-color;
+    }
+  }
+  .py-35 {
+    padding-top: 35px !important;
+    padding-bottom: 35px !important;
+  }
+  .px-60 {
+    padding-right: 60px !important;
+    padding-left: 60px !important;
+  }
+  
+  .mt-n75 {
+    margin-top: -75px !important;
+  }
 }
 .partners {
   .bg-box {
     position: relative;
     transform: translate(60%, 50px);
+  }
+  #partners-list-ref {
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+      gap: 2.5rem;
+    }
   }
 }
 .quotation {
@@ -532,56 +620,25 @@ img {
 .footer {
   position: relative;
   background-color: $black;
+
   .container {
     color: $white;
   }
   .footer-logo {
-    max-width: 150px;
-  }
-  .bg-holder {
-    position: absolute;
+    max-width: 100px;
     width: 100%;
-    min-height: 100%;
-    top: 0;
-    left: 0;
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
-    will-change: transform, opacity, filter;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    background-repeat: no-repeat;
-    z-index: 0;
   }
-  .bg-holder.overlay:before {
-    position: absolute;
-    content: "";
-    backdrop-filter: saturate(100%) blur(5px);
-    background: rgba(0, 0, 0, 0.25);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  .social-icons {
+    //color: #ffffff63;
   }
-
-
 }
 .background {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: 0;
-  background-size: cover;
+  //background-size: 1920px 630px;
   background-position: center;
   overflow: hidden;
-}
-
-figure {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 40px;
-  margin-inline-end: 40px;
+  will-change: transform, opacity, filter;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  z-index: 0;
 }
