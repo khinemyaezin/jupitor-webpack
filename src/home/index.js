@@ -149,17 +149,17 @@ function prepareAbout() {
   $("#about #about-title").html(jsonAbout.title);
   $("#about #about-desc").html(jsonAbout.desc);
 
-  const education = valueHtml(
-    "Education",
-    jsonUser.qualification.join("<br>"),
-    "images/value_1.png"
-  );
-  $("#about-values").append($.parseHTML(education));
-  for (let value of jsonAbout.values) {
-    const s = valueHtml(value.title, value.desc, value.image);
-    const valueRef = $.parseHTML(s);
-    $("#about-values").append(valueRef);
-  }
+  // const education = valueHtml(
+  //   "Education",
+  //   jsonUser.qualification.join("<br>"),
+  //   "images/value_1.png"
+  // );
+  // $("#about-values").append($.parseHTML(education));
+  // for (let value of jsonAbout.values) {
+  //   const s = valueHtml(value.title, value.desc, value.image);
+  //   const valueRef = $.parseHTML(s);
+  //   $("#about-values").append(valueRef);
+  // }
 }
 
 function valueHtml(title, desc, image) {
