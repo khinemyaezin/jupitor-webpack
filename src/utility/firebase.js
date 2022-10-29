@@ -51,12 +51,12 @@ export class FirebaseInit {
     this.#auth = getAuth(this.#app);
     this.#db = getFirestore(this.#app);
 
-    this.#appcheck = initializeAppCheck(this.#app, {
-      provider: new ReCaptchaV3Provider(
-        "6Lczxb0iAAAAALnYCEJFEj6vNq2EViFO7ZBdCebo"
-      ),
-      isTokenAutoRefreshEnabled: true,
-    });
+    // this.#appcheck = initializeAppCheck(this.#app, {
+    //   provider: new ReCaptchaV3Provider(
+    //     "6Lczxb0iAAAAALnYCEJFEj6vNq2EViFO7ZBdCebo"
+    //   ),
+    //   isTokenAutoRefreshEnabled: true,
+    // });
   }
 
   get getCurrentuser() {

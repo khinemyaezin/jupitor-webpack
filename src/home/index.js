@@ -149,29 +149,27 @@ function prepareAbout() {
   $("#about #about-title").html(jsonAbout.title);
   $("#about #about-desc").html(jsonAbout.desc);
 
-  // const education = valueHtml(
-  //   "Education",
-  //   jsonUser.qualification.join("<br>"),
-  //   "images/value_1.png"
-  // );
-  // $("#about-values").append($.parseHTML(education));
-  // for (let value of jsonAbout.values) {
-  //   const s = valueHtml(value.title, value.desc, value.image);
-  //   const valueRef = $.parseHTML(s);
-  //   $("#about-values").append(valueRef);
-  // }
+  const education = valueHtml(
+    "Education",
+    jsonUser.qualification.join("<br>"),
+    "images/value_1.png"
+  );
+  $("#about-values").append($.parseHTML(education));
+  for (let value of jsonAbout.values) {
+    const s = valueHtml(value.title, value.desc, value.image);
+    const valueRef = $.parseHTML(s);
+    $("#about-values").append(valueRef);
+  }
 }
 
 function valueHtml(title, desc, image) {
-  return `<div class="d-flex mb-3">
-            <div class="pe-3 pe-sm-4">
-              <img class="" src="${image}" width="50">
-            </div>
-            <div class="flex-1">
+  return ` <div class="d-flex p-3 gap-3 align-items-center">
+            <div class="display-2 text-white bg-dark fw-bold m-0 align-self-start p-1 ">${title.substring(0,1)}</div>
+            <div class="flex-grow-1 ps-3">
               <div class="overflow-hidden">
-                <h5 class="mb-2">${title}</h5>
+                  <h5 class="mb-2 lead fw-bold">${title}</h5>
               </div>
-              <p class="bd-callout bd-callout-warning">${desc}</p>
+              <p>${desc}</p>
             </div>
           </div>`;
 }

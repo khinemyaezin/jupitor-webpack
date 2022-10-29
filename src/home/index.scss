@@ -15,43 +15,13 @@ img {
 .jarallax {
   position: relative;
   z-index: 0;
-  height: 100vh;
-  .overlay {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
-    margin: 0;
-  }
-  .jarallax-img {
-    position: absolute;
-    object-fit: cover;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    animation: popup-keyframe 0.75s 0.5s backwards;
-  }
+  height: 100%;
 }
 
 .hero-landing {
   @include media-breakpoint-down(sm) {
-    .row {
-      flex-direction: column;
-    }
-    .jarallax {
-      height: 50vh;
-    }
     .hero-root {
       padding: 0 2rem 0 2rem;
-    }
-  }
-  @include media-breakpoint-up(md) {
-    .row {
-      flex-direction: row;
     }
   }
 
@@ -120,6 +90,28 @@ img {
     @include media-breakpoint-down(sm) {
       font-size: medium;
     }
+  }
+
+  .square {
+    position: relative;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .square::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+  .square .square-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .border-custom{
+    border-width: 0.5rem !important;
   }
 }
 .services {
@@ -476,8 +468,8 @@ img {
       transition: transform 150ms linear;
       transition: transform 150ms linear, -webkit-transform 150ms linear;
       -webkit-transform: scale(1);
-          -ms-transform: scale(1);
-              transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
       will-change: transform;
     }
     .img-overlay,
@@ -512,7 +504,8 @@ img {
       flex-direction: column;
       z-index: 1;
     }
-    .title,.subtitle {
+    .title,
+    .subtitle {
       color: $white;
       text-align: center;
     }
