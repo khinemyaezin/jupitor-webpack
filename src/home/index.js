@@ -1,33 +1,40 @@
 import "../home/index.scss";
 import "jquery";
 import { jarallax } from "jarallax";
-import Masonry from "masonry-layout";
-import imagesLoaded from "imagesloaded";
 import Scrollax from "scrollax";
 import Aos from "aos";
 import { runHeaderControl } from "../utility/main";
 import {FirebaseInit} from '../utility/firebase';
 import 'bootstrap/js/dist/offcanvas';
 import { Quote } from "../utility/model-quote";
-
+import TxtType from "../utility/text-writer";
+//import Flickity from 'flickity';
 import jsonUser from "../data-json/user-info.json";
 import jsonFooter from "../data-json/section-footer.json";
 import jsonAbout from "../data-json/section-about.json";
 import jsonPartner from "../data-json/section-partners.json";
-
-require.context("../assets", false, /\.(svg|png|jpe?g|gif)$/i);
+import jsonGallery from "../data-json/section-gallery.json";
+//require.context("../assets", false, /\.(svg|png|jpe?g|gif)$/i)
+// const images = importAll(require.context("../assets", false, /\.(svg|png|jpe?g|gif)$/i));
+// function importAll(r) {
+//   let images = {};
+//   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+//   return images;
+// }
 
 const firebase = new FirebaseInit();
 
 window.onload = () => {
   runHeaderControl();
   runJarallax();
-  runMasonry();
   runScrollax();
   runAos();
   writeCopywrite();
   prepareHero();
   prepareAbout();
+  prepareServices();
+  prepareGallery();
+  runMasonry();
   createPartners();
   prepareFooter();
   $("#quote-form").on("submit", quote);
@@ -43,15 +50,18 @@ function runJarallax() {
 
 function runMasonry() {
   /** Masonry */
-  const gridRef = document.querySelector(".grid");
-  const moasonry = new Masonry(gridRef, {
-    itemSelector: ".grid-item",
-    percentPosition: true,
-    columnWidth: ".grid-sizer",
-  });
-  imagesLoaded(gridRef).on("progress", function () {
-    moasonry.layout();
-  });
+  // const gridRef = document.querySelector(".grid");
+  // const moasonry = new Masonry(gridRef, {
+  //   itemSelector: ".grid-item",
+  //   percentPosition: true,
+  //   columnWidth: '.grid-sizer',
+  //   gutter: 10,
+  //   stagger: 30,
+  //   originLeft:false
+  // });
+  // imagesLoaded(gridRef).on("progress", function () {
+  //   moasonry.layout();
+  // });
 }
 
 function runScrollax() {
@@ -88,21 +98,28 @@ function quote(event) {
     });
 }
 
+/** Sections */
 function prepareHero() {
-  $("#hero-landing #hero-name").text(jsonUser.name + ",");
-  $("#hero-landing #hero-nickname").text(jsonUser.nick_name);
-  $("#hero-landing #text-type").text(jsonUser.carrier);
+  $("#hero-landing #hero-carrier").text(jsonUser.carrier);
   $("#hero-landing #hero-pitch").html(jsonUser.pitch.join("<br>"));
-
-  for (let social of jsonUser.socials) {
-    $("#hero-landing #hero-socials").append(
-      $.parseHTML(
-        `<a class="${social.icon} text-dark text-decoration-none" href="${social.href}"></a>`
-      )
-    );
+  new TxtType(document.getElementById('hero-name'),[jsonUser.name,jsonUser.nick_name])
+}
+function prepareAbout() {
+  $("#about #about-title").html(jsonAbout.title);
+  $("#about #about-desc").html(jsonAbout.desc);
+  //$('#about #about-image').attr('src',images['about.jpg']);
+  const education = valueHtml(
+    "Education",
+    jsonUser.qualification.join("<br>"),
+    ""
+  );
+  $("#about-values").append($.parseHTML(education));
+  for (let value of jsonAbout.values) {
+    const s = valueHtml(value.title, value.desc, value.image);
+    const valueRef = $.parseHTML(s);
+    $("#about-values").append(valueRef);
   }
 }
-
 function createPartners() {
   const list = jsonPartner.partners;
   for (let data of list) {
@@ -124,56 +141,32 @@ function createPartners() {
     );
     const detail = $.parseHTML(`<p class="font-pt">${data.detail}</p>`);
     $(txtAdjHeight).append(detail);
+    $(txtAdjHeight).append(learnMoreBtn);
     $(col).append(txtAdjHeight);
-    $(col).append(learnMoreBtn);
     $("#partners-list-ref").append(col);
   }
 }
-
-function _textAdjustHeight(groupContent, articleTitle, theme) {
-  const longestArticle = theme._articles.reduce(function (a, b) {
-    return a.title.length > b.title.length ? a : b;
-  });
-  $(articleTitle).text(longestArticle.title);
-  $(articleTitle).addClass("position-relative invisible");
-  const c = ".txt-adj-h-container";
-  $(groupContent)
-    .find(c)
-    .each(function () {
-      $(this).find(".article-title").addClass("position-absolute ");
-      $(articleTitle).clone().appendTo(this);
-    });
+function prepareServices() {
+  //$('#services #service-image').attr('src',images['service.svg'])
 }
+function prepareGallery(){
+  jsonGallery.works.forEach( (work,index) => {
+    const gallery = $.parseHTML(
+      `<a class="grid-item" href="#">
+        <img loading="lazy" src="${work.url}" alt="work-gallery-${index+1}">
+        <span class="background-color"></span>
+        <div class="img-overlay">
+            <article class="p-2">
+                <div class="title h5">${work.title}</div>
+                <div class="subtitle">${work.desc}</div>
+            </article>
+        </div>
+      </a>`
+    );
 
-function prepareAbout() {
-  $("#about #about-title").html(jsonAbout.title);
-  $("#about #about-desc").html(jsonAbout.desc);
-
-  const education = valueHtml(
-    "Education",
-    jsonUser.qualification.join("<br>"),
-    "images/value_1.png"
-  );
-  $("#about-values").append($.parseHTML(education));
-  for (let value of jsonAbout.values) {
-    const s = valueHtml(value.title, value.desc, value.image);
-    const valueRef = $.parseHTML(s);
-    $("#about-values").append(valueRef);
-  }
+    $('#gallery-grid').append(gallery);
+  })
 }
-
-function valueHtml(title, desc, image) {
-  return ` <div class="d-flex p-3 gap-3 align-items-center">
-            <div class="display-2 text-white bg-dark fw-bold m-0 align-self-start p-1 ">${title.substring(0,1)}</div>
-            <div class="flex-grow-1 ps-3">
-              <div class="overflow-hidden">
-                  <h5 class="mb-2 lead fw-bold">${title}</h5>
-              </div>
-              <p>${desc}</p>
-            </div>
-          </div>`;
-}
-
 function prepareFooter() {
   $("footer #copyright-txt").html(jsonFooter.copyright_txt);
   $("footer #footer-company-desc").text(jsonFooter.company_desc);
@@ -192,3 +185,32 @@ function prepareFooter() {
     );
   }
 }
+
+function _textAdjustHeight(groupContent, articleTitle, theme) {
+  const longestArticle = theme._articles.reduce(function (a, b) {
+    return a.title.length > b.title.length ? a : b;
+  });
+  $(articleTitle).text(longestArticle.title);
+  $(articleTitle).addClass("position-relative invisible");
+  const c = ".txt-adj-h-container";
+  $(groupContent)
+    .find(c)
+    .each(function () {
+      $(this).find(".article-title").addClass("position-absolute ");
+      $(articleTitle).clone().appendTo(this);
+    });
+}
+
+
+function valueHtml(title, desc, image) {
+  return ` <div class="d-flex p-3 gap-3 align-items-center">
+            <div class="display-2 text-white bg-dark fw-bold m-0 align-self-start p-1 ">${title.substring(0,1)}</div>
+            <div class="flex-grow-1 ps-3">
+              <div class="overflow-hidden">
+                  <h5 class="mb-2 lead fw-bold">${title}</h5>
+              </div>
+              <p>${desc}</p>
+            </div>
+          </div>`;
+}
+

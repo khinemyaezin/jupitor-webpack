@@ -4,12 +4,16 @@ const webpack = require("webpack");
 module.exports = {
   mode: "development",
   entry: {
-
     index: "./src/home/index.js",
     signup: "./src/auth/signup.js",
     login: "./src/auth/login.js",
     test: "./src/test/test.js",
     quote: "./src/quote/quote.js",
+  },
+  resolve: {
+    alias: {
+      assets: path.resolve(__dirname, 'src/assets')
+    },
   },
   devtool: "inline-source-map",
   devServer: {
@@ -47,13 +51,15 @@ module.exports = {
         ],
       },
       {
-        test: /\.(svg|png|jpe?g|gif)$/i,
-        loader: "file-loader",
-        options: {
-          name: "[name].[ext]",
-          outputPath: "images",
-        },
+        test: /\.(png|jpe?g|gif)$/i,
+        type: "asset/resource",
+        
       },
+      {
+        test: /\.svg$/,
+        type: 'asset',
+        use: 'svgo-loader'
+      }
     ],
   },
   plugins: [
@@ -100,11 +106,7 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
+    assetModuleFilename: 'assets/[hash][ext]',
     clean: true,
-  },
-  resolve: {
-    alias: {
-      jquery: require.resolve("jquery"), // resolve to dist folder
-    },
   },
 };

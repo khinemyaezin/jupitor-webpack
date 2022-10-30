@@ -19,7 +19,7 @@
                         <i class="bi bi-list fs-2"></i>
                     </button>
                     <a class="header-logo" href="index.html">
-                        <img id="brand-logo" src="images/logo.svg" />
+                        <img id="brand-logo" src="assets/logo.svg" />
                     </a>
                 </div>
                 <div class="header-navigation offcanvas offcanvas-start" id="offcanvas">
@@ -42,77 +42,56 @@
     </header>
     <main data-scrollax-parent="true">
 
-        <section class="hero-landing py-0 background" id="hero-landing">
-            <div class="container-fluid">
+        <section class="hero-landing background" id="hero-landing">
+            <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 p-5 position-relative">
-                        <!-- <div class="image-container">
-                            <img class="" src="images/hero.svg" alt="">
-                            <svg class="position-absolute top-50 end-0 d-none d-md-block"
-                                xmlns="http://www.w3.org/2000/svg" width="88.209" height="98.922"
-                                viewBox="0 0 88.209 98.922" class="home-start-upload-arrow sprite sprite-arrow">
-                                <path
-                                    d="M79.79,93.774l-2.981,1.17-1.641.6-3.195,1.112c-4.176,1.41-8,2.525-11.282,3.3-6.561,1.548-10.941,1.733-11.585.189s2.569-4.527,8.285-8.1c2.425-1.516,5.322-3.141,8.544-4.8A57.408,57.408,0,0,1,48.179,81.8,60.135,60.135,0,0,1,38.5,75.7,58.62,58.62,0,0,1,29.7,67.015,61.125,61.125,0,0,1,18.809,46.249a68.736,68.736,0,0,1-3.02-18.388A53.086,53.086,0,0,1,15.95,20.8c.086-1.034.147-1.993.287-2.873s.3-1.682.466-2.4c.65-2.878,1.407-4.432,2.244-4.431s1.676,1.547,2.473,4.275c.2.682.4,1.438.589,2.264l.7,2.662c.488,1.9.9,4.068,1.571,6.4a110.967,110.967,0,0,0,5.058,15.825,66.468,66.468,0,0,0,9.768,16.843,60.866,60.866,0,0,0,6.913,7.144,67.012,67.012,0,0,0,7.545,5.506,78,78,0,0,0,14.7,6.927c.152.054.3.1.446.155-2.663-3.208-4.966-6.216-6.789-8.867-3.819-5.554-5.579-9.57-4.372-10.73s5.15.754,10.551,4.788c2.7,2.017,5.765,4.563,9.034,7.52L79.622,74.1l1.268,1.2,2.267,2.26c3.354,3.371,6.86,6.955,10.378,10.614C88.855,90.127,84.209,92.018,79.79,93.774Z"
-                                    transform="translate(-16.963 0.383) rotate(-7)" fill="currentColor"></path>
-                            </svg>
-                        </div> -->
-                        <div class="jarallax row" style="background-image: url('images/service_5.jpg');">
+                    <div class="col-lg-6 position-relative">
+                        <div class="jarallax row g-0" style="background-image: url('assets/gallery_1.jpg');">
                             <div class="col-6 p-0 border border-white border-custom">
                                 <div class="square">
-                                    <div class="square-inner"></div>
                                 </div>
                             </div>
                             <div class="col-6 p-0 border border-white border-custom">
-                                <div class="square">
-                                    <div class="square-inner"></div>
+                                <div class="row">
+                                    <div class="col-12  p-0 border-start border-bottom border-white border-custom">
+                                        <div class="square"></div>
+                                    </div>
+                                    <div class="col-12  p-0 border-start border-top border-white border-custom">
+                                        <div class="square"></div>
+
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-6 p-0 border border-white border-custom">
-                                <div class="square">
-                                    <div class="square-inner"></div>
-                                </div>
-                            </div>
-                            <div class="col-6 p-0 border border-white border-custom">
-                                <div class="square">
-                                    <div class="square-inner"></div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="col hero-detail offset-lg-1">
                         <div class="hero-container">
                             <div class="hero-root ">
                                 <article class="row justify-content-center">
-                                    <div class="col-11">
-                                        <div class="overflow-hidden fw-light text-uppercase">
-                                            <h1 class="">
-                                                <span class="d-block" id="hero-name"></span>
-                                                <span class="d-block mb-2" id="hero-nickname"></span>
-                                                <span
-                                                    class="d-block fw-bold typewrite-v2 blinker anim-typewriter text-wrap text-primary"
-                                                    id="text-type"></span>
-                                            </h1>
+                                    <div class="col-12 col-md-11">
 
-                                        </div>
-                                        <div class="overflow-hidden">
-                                            <p class="lead font-sans-serif mt-lg-4 mt-2 text-500 "
-                                                data-aos="zoom-out-right" id="hero-pitch">
-                                            </p>
-                                        </div>
-                                        <div class="overflow-hidden">
-                                            <div class="mt-3 mt-lg-5">
-                                                <a class="btn btn-lg btn-primary bg-gradiant" href="#!">Quote</a>
-
+                                        <h1 class="text-uppercase fw-bold mb-4">
+                                            <span class="underline-brush" id="hero-carrier"></span>
+                                        </h1>
+                                        <h1 class="text-muted">
+                                            <span>I'm </span>
+                                            <span class="fw-semibold typewrite-v2 blinker anim-typewriter"
+                                                id="hero-name"></span>
+                                            </h2>
+                                            <div class="overflow-hidden">
+                                                <p class="lead mt-4" data-aos="zoom-out-right" id="hero-pitch">
+                                                </p>
                                             </div>
-                                        </div>
-                                        <!-- <div class="overflow-hidden">
-                                            <div
-                                                class="d-flex align-items-center fw-bold ls mt-3 mt-md-5 text-uppercase gap-2">
-                                                <h6 class="mb-0">Follow Us:</h6>
-                                                <div class="d-flex justify-content-start gap-2 fs-5 " id="hero-socials">
+                                            <div class="overflow-hidden">
+                                                <div class="mt-3 mt-lg-5">
+                                                    <a class="btn btn-lg btn-primary bg-gradiant" href="#!">
+                                                        Quote
+                                                        <i class="bi bi-chevron-down"></i>
+                                                    </a>
+
                                                 </div>
                                             </div>
-                                        </div> -->
                                     </div>
                                 </article>
                             </div>
@@ -144,7 +123,7 @@
                                 </svg>
                             </div>
                             <div class="image-container">
-                                <img src="images/about.jpg" alt="">
+                                <img src="assets/about.jpg" alt="" id="about-image">
                             </div>
                         </div>
                         <div class="overflow-hidden shape-parent text-center d-inline-flex position-absolute mt-n75">
@@ -173,8 +152,11 @@
             <div class="container">
                 <div class="row mb-3 mb-lg-7">
                     <div class="col-lg-6">
-                        <h1 class="fw-bold" data-aos="fade-up" data-aos-delay="0">What we can <span
-                                class="text-primary">offer</span></h1>
+                        <h1 class="fw-bold" data-aos="fade-up" data-aos-delay="0">
+                            <span class="underline-brush">
+                                What we can <span class="text-primary">offer</span>
+                            </span>
+                        </h1>
                         <p class="mt-3" data-aos="fade-up" data-aos-delay="50">Years of experience in the industry along
                             with partnerships with many major corporations.
                         </p>
@@ -182,7 +164,7 @@
                 </div>
                 <div class="service-list">
                     <div class="position-relative pe-lg-5 service-item-left">
-                        <h5 class="font-pt" data-aos="fade-up" data-aos-delay="0">Cable Detection</h5>
+                        <h5 class="" data-aos="fade-up" data-aos-delay="0">Cable Detection</h5>
                         <p class="" data-aos="fade-up" data-aos-delay="50">
                             Our services include locating underground cables and other utilities in work places
                             such
@@ -190,44 +172,19 @@
                             construction sites and other places where earthworks are required or being carried
                             out.
                         </p>
-                        <!-- <div class="service-item-before-left">
-                            <div class="">
-                                <h5 class="font-pt" data-aos="fade-up" data-aos-delay="0">Cable Detection</h5>
-                                <p class="" data-aos="fade-up" data-aos-delay="50">
-                                    Our services include locating underground cables and other utilities in work places
-                                    such
-                                    as
-                                    construction sites and other places where earthworks are required or being carried
-                                    out.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="service-item-after-left">
-                            <div class="d-flex gap-2">
-                                <div class="service-item-mini-image">
-                                    <img src="images/service_1.jpg" alt="">
-                                </div>
-                                <div class="service-item-mini-image">
-                                    <img src="images/service_2.jpg" alt="">
-                                </div>
-                                <div class="service-item-mini-image">
-                                    <img src="images/service_3.jpg" alt="">
-                                </div>
 
-                            </div>
-                        </div> -->
                     </div>
                     <div class="service-item">
                         <div class="service-content">
                             <div class="service-list-subhead">
-                                <small class="font-pt">Cable Detection</small>
+                                <small class="">Cable Detection</small>
                             </div>
                             <div class="service-list-head">
                                 <h4>We are all users</h4>
                             </div>
                             <div class="service-list-image">
                                 <span class="image-root">
-                                    <img alt="" aria-hidden="true" src="images/service.svg">
+                                    <img src="assets/service.svg" alt="" aria-hidden="true" id="service-image">
                                 </span>
                             </div>
                             <div class="service-list-body">
@@ -241,7 +198,7 @@
 
                     </div>
                     <div class="position-relative ps-lg-5 service-item-right">
-                        <span class="h5 font-pt">Our scope of works include,</span> but not limited to,
+                        <span class="h5 ">Our scope of works include,</span> but not limited to,
                         Detection for Power Cables,
                         Telecommunication Cables, Gas Mains, Water Mains, Trial Trenching.
 
@@ -251,14 +208,15 @@
             </div>
         </section>
 
-        <section class="gallery position-relative background" id="gallery"
-            style="background-image: url('images/lines.svg');">
+        <section class="gallery position-relative background" id="gallery">
             <div class="container">
                 <div class="row mb-3 mb-lg-7">
                     <div class="col-lg-6">
                         <h1 class="fw-bold" data-aos="fade-up" data-aos-delay="0">
-                            Look at my
-                            <span class="text-primary">work</span>
+                            <span class="underline-brush">
+                                Look at my
+                                <span class="text-primary">work</span>
+                            </span>
                         </h1>
                         <p class="mt-3" data-aos="fade-up" data-aos-delay="50">
                             Our Team has worked on sites all around Sydney and NSW from small scaled jobs for
@@ -268,38 +226,12 @@
                     </div>
                 </div>
 
-                <div class="grid">
+                <!-- <div class="grid" id="gallery-grid">
                     <div class="grid-sizer"></div>
-                    <a class="grid-item" href="#">
-                        <img loading="lazy" src="images/gallery_1.jpg" alt="">
-                        <span class="background-color"></span>
-                        <div class="img-overlay">
-                            <article>
-                                <div class="title h5">Book Design</div>
-                                <div class="subtitle">Development</div>
-                            </article>
-                        </div>
-                    </a>
-                    <a class="grid-item" href="#">
-                        <img loading="lazy" src="images/gallery_2.jpg" alt="">
-                        <span class="background-color"></span>
-                        <div class="img-overlay">
-                            <article>
-                                <div class="title h5">Book Design</div>
-                                <div class="subtitle">Development</div>
-                            </article>
-                        </div>
-                    </a>
-                    <a class="grid-item" href="#">
-                        <img loading="lazy" src="images/gallery_3.jpg" alt="">
-                        <span class="background-color"></span>
-                        <div class="img-overlay">
-                            <article>
-                                <div class="title h5">Book Design</div>
-                                <div class="subtitle">Development</div>
-                            </article>
-                        </div>
-                    </a>
+
+                </div> -->
+                <div class="flexbin flexbin-margin" id="gallery-grid">
+
                 </div>
             </div>
 
@@ -309,7 +241,9 @@
             <div class="container">
                 <div class="row mb-5">
                     <div class="col col-lg-6">
-                        <h1 class="fw-bold" data-aos="fade-up" data-aos-delay="0">Trusted By</h1>
+                        <h1 class="fw-bold" data-aos="fade-up" data-aos-delay="0">
+                            <span class="underline-brush">Trusted By</span>
+                        </h1>
                         <p class="mt-3" data-aos="fade-up" data-aos-delay="50">
                             We are honored to have the opportunity to work with various partners and clients
                             across
@@ -320,108 +254,109 @@
                     </div>
                 </div>
                 <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 justify-content-start" id="partners-list-ref">
+
                 </div>
             </div>
         </section>
 
         <section class="quotation" id="quotation">
-            <div class="bg-light">
-                <div class="container py-5 ">
-                    <div class="row pt-sm-3 pt-md-4 position-relative">
-                        <div class="col-md-6 col-xl-5 offset-xl-1">
-                            <h2 class="display-3 mb-5">
-                                Ready to take
-                                <br>your business
-                                <br>to the next level?
-                            </h2>
-                            <div class="mb-2 font-pt">
-                                <h6>You can reach me by</h6>
-                            </div>
-                            <ul class="list-unstyled list-py-1 font-pt">
-                                <li>
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0 text-center" style="width: 1.5rem;">
-                                            <img src="images/singapore-flag-icon.svg" alt="Image description">
-                                        </div>
-                                        <div class="flex-grow-1 ms-2">
-                                            <span>Singapore</span>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0 text-center" style="width: 1.5rem;">
-                                            <span class="svg-icon svg-icon-xs text-muted mt-0">
-                                                <i class="bi bi-geo-alt-fill"></i>
-                                            </span>
-                                        </div>
-                                        <div class="flex-grow-1 ms-2">
-                                            <span>153 Williamson Plaza, Maggieberg, SE56 FF12</span>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0 text-center" style="width: 1.5rem;">
-                                            <span class="svg-icon svg-icon-xs text-muted mt-0">
-                                                <i class="bi bi-phone-fill"></i>
-                                            </span>
-                                        </div>
-                                        <div class="flex-grow-1 ms-2">
-                                            <span>062 1099222</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+            <div class="">
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col col-lg-6">
+                            <h1 class="fw-bold" data-aos="fade-up" data-aos-delay="0">
+                                <span class="underline-brush">Trusted By</span>
+                            </h1>
+                            <p class="mt-3" data-aos="fade-up" data-aos-delay="50">
+                                We are honored to have the opportunity to work with various partners and clients
+                                across
+                                different sectors and all walks of life.
+                                We are always open to new partnerships and provide
+                                our expertise to support your firm to achieve greater heights.
+                            </p>
                         </div>
-                        <div class="quotation-form ">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row align-items-center">
-                                        <div class="col col-md-4 order-md-2">
-                                            <img class="avatar" src="images/quoatation_1.svg" alt="Image Description">
-                                        </div>
-                                        <div class="col-sm-12 col-md-8">
-                                            <h3 class="font-pt fw-bold">Join <span class="text-primary">Us</span></h3>
-                                            <p class="font-pt">Hundreds of companies using us to build their business.
+                    </div>
+                    <div class="row pt-sm-3 pt-md-4 position-relative">
+                        <div class="col-md-6 col-xl-5">
+                          
+                            <div class="row g-3">
+
+                                <div class="col-6">
+                                    <div class="p-3 bg-light">
+                                        <div class="text-center">
+                                            <div class="card-icon">
+                                                <i class="bi bi-telephone-fill"></i>
+                                            </div>
+                                            <div
+                                                class="lh-1 py-3 fs-6 text-uppercase fw-bold letter-spacing-caption text-muted">
+                                                MOBILE PHONE
+                                            </div>
+                                            <p class="mb-0 text-body">
+                                                09796969696
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
-
-                                    <form id="quote-form">
-                                        <div class="mb-4">
-                                            <label class="form-label" for="registerName">Your name</label>
-                                            <input type="text" class="form-control form-control-lg" name="name"
-                                                id="registerName" placeholder="Type your name"
-                                                aria-label="Type your name">
+                                <div class="col-6">
+                                    <div class="p-3 bg-light">
+                                        <div class="text-center">
+                                            <div class="card-icon">
+                                                <i class="bi bi-envelope-fill"></i>
+                                            </div>
+                                            <div
+                                                class="lh-1 py-3 fs-6 text-uppercase fw-bold letter-spacing-caption text-muted">
+                                                Email
+                                            </div>
+                                            <div class="mb-0 text-wrap">
+                                                <a href="mailto:cabledetection@gmail.com" class="text-decoration-none text-reset">cabledetection@gmail.com</a>
+                                            </div>
                                         </div>
-                                        <div class="mb-4">
-                                            <label class="form-label" for="registerEmail">Your email</label>
-                                            <input type="email" class="form-control form-control-lg" name="email"
-                                                id="registerEmail" placeholder="example@site.com"
-                                                aria-label="example@site.com" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="p-3 bg-light">
+                                        <div class="text-center">
+                                            <div class="card-icon">
+                                                <i class="bi bi-geo-alt-fill"></i>
+                                            </div>
+                                            <div
+                                                class="lh-1 py-3 fs-6 text-uppercase fw-bold letter-spacing-caption text-muted">
+                                                Address
+                                            </div>
+                                            <p class="mb-0 text-body">
+                                                Address
+                                            </p>
                                         </div>
-                                        <div class="mb-4">
-                                            <label class="form-label" for="registerMessage">Your message for us</label>
-                                            <input type="text" class="form-control form-control-lg" name="message"
-                                                id="registerMessage" placeholder="">
-
-                                        </div>
-                                        <div>
-                                            <input type="submit" class="btn btn-lg btn-primary w-100">
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="quotation-form ">
+                          
+                            <form id="quote-form">
+                                <div class="mb-5">
+                                    <input type="text" class="form-control form-control-lg" name="name"
+                                        id="registerName" placeholder="Type your name" aria-label="Type your name">
+                                </div>
+                                <div class="mb-5">
+                                    <input type="email" class="form-control form-control-lg" name="email"
+                                        id="registerEmail" placeholder="example@site.com" aria-label="example@site.com"
+                                        required>
+                                </div>
+                                <div class="mb-5">
+                                    <input type="text" class="form-control form-control-lg" name="message"
+                                        id="registerMessage" placeholder="Message for us">
+
+                                </div>
+                                <div>
+                                    <input type="submit" class="btn btn-lg btn-primary w-100">
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="d-none d-md-block text-center mt-n5" style="margin-top: -5rem;">
                         <svg class="text-warning" width="171" height="97" viewBox="0 0 171 97" fill="currentColor"
-                            xmlns="images/quoatation_1.svg">
+                            xmlns="assets/quoatation_1.svg">
                             <path
                                 d="M169.319 54.333C162.404 55.9509 155.712 58.0764 149.09 60.6764L149.07 60.6761C148.967 60.7158 148.863 60.7554 148.76 60.7951C147.3 61.3811 148.325 63.4238 149.672 63.2067C154.548 62.4134 159.994 59.8725 164.87 59.0792C148.278 73.1339 129.684 89.2549 107.779 92.6402C85.6981 96.0539 65.5665 86.7839 56.8768 66.9865C70.9662 55.0671 79.2106 35.6614 79.0299 17.6457C78.9484 10.3157 76.1485 -3.36373 65.7068 1.21851C55.8557 5.53146 52.0466 22.5213 50.5736 31.7739C48.7364 43.2858 49.7593 55.5291 53.8643 66.2014C52.787 67.0812 51.6907 67.8989 50.5755 68.6546C40.6328 75.3851 27.1039 78.8929 16.4487 72.0362C2.91045 63.3259 1.93984 44.9485 1.56902 30.4091C1.54778 29.6265 0.359869 29.6092 0.360624 30.3915C0.322634 44.0809 0.835929 59.065 10.5664 69.6857C18.5722 78.4182 30.4315 79.7753 41.3346 75.9924C46.2437 74.2834 50.7739 71.7557 54.8581 68.6348C59.9738 80.2586 68.9965 89.6956 82.2735 93.7393C113.474 103.223 141.744 83.0494 164.903 63.697L161.901 71.0334C161.267 72.5887 163.76 73.2736 164.393 71.7389C165.986 67.8713 167.569 63.9933 169.152 60.1359C169.288 60.0247 169.695 58.6127 169.821 58.491C170.122 57.1161 169.152 60.1359 169.851 58.4169C170.189 57.6087 170.517 56.79 170.855 55.9818C171.248 54.9994 170.185 54.1192 169.319 54.333ZM54.3624 59.8578C51.4872 49.1623 51.6051 37.5841 54.2025 26.8039C55.5185 21.3369 57.4405 15.8066 60.1572 10.8541C61.2311 8.89354 62.5139 6.77134 64.2307 5.31421C69.4231 0.902277 74.3649 4.80357 75.8002 10.4446C80.5272 28.9489 70.1806 51.6898 55.8431 64.5114C55.2971 63.0109 54.793 61.4698 54.3624 59.8578Z">
                             </path>
@@ -432,13 +367,13 @@
 
         </section>
     </main>
-    <footer class="pt-lg-10 pt-5 footer background " style="background-image: url('images/lines.svg');">
+    <footer class="pt-lg-10 pt-5 footer background " style="background-image: url('assets/lines.svg');">
         <div class="container">
             <div class="d-flex wrapper align-items-lg-center flex-column flex-lg-row gap-3">
                 <div class="flex-shrink-1 align-self-start">
                     <div class="d-flex align-items-lg-center gap-3 flex-column flex-lg-row">
                         <div class="">
-                            <img class="footer-logo" src="images/logo.svg" alt="">
+                            <img class="footer-logo" src="assets/logo.svg" alt="">
                         </div>
                         <div>
                             <p id="footer-company-desc"></p>
