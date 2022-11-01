@@ -1,19 +1,19 @@
 {
   "partners": [
     {
-      "image": "assets/client_gms.png",
+      "url": "assets/client_gms.png",
       "name": "Gims & Associates Pte Ltd",
       "detail": "M&E Consultancy for Building · Fire Safety Engineering · Green Mark Consultant",
       "link":""
     },
     {
-      "image": "assets/client_shmz.png",
+      "url": "assets/client_shmz.png",
       "name": "Shimizu Corporation Singapore",
       "detail": "Projects · Office · Medical and Welfare · Educational and Cultural · Residential · Transportation and Telecommunications · Resources and Energy · Mixed Development",
       "link":""
     },
     {
-      "image": "assets/client_sfa.png",
+      "url": "assets/client_sfa.png",
       "name": "Singapore Food Agency",
       "detail": "SFA is the national authority entrusted with the mission to ensure a resilient supply of food safety and food security from farm-to-fork for Singapore.",
       "link":""

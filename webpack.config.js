@@ -12,7 +12,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      assets: path.resolve(__dirname, 'src/assets')
+      assets: path.resolve(__dirname, "src/assets"),
     },
   },
   devtool: "inline-source-map",
@@ -51,15 +51,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(jpe?g|png)$/i,
         type: "asset/resource",
-        
       },
       {
         test: /\.svg$/,
-        type: 'asset',
-        use: 'svgo-loader'
-      }
+        type: "asset",
+        use: "svgo-loader",
+      },
     ],
   },
   plugins: [
@@ -106,7 +105,7 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
-    assetModuleFilename: 'assets/[hash][ext]',
+    assetModuleFilename: "assets/[name][ext]",
     clean: true,
   },
 };

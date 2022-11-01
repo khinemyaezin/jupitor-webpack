@@ -4,8 +4,12 @@ import { jarallax } from "jarallax";
 import Scrollax from "scrollax";
 import Aos from "aos";
 import { runHeaderControl } from "../utility/main";
-import {FirebaseInit} from '../utility/firebase';
-import 'bootstrap/js/dist/offcanvas';
+import { FirebaseInit } from "../utility/firebase";
+import "bootstrap/js/dist/offcanvas";
+import "bootstrap/js/dist/collapse";
+import "bootstrap/js/dist/scrollspy";
+import "bootstrap/js/dist/carousel";
+
 import { Quote } from "../utility/model-quote";
 import TxtType from "../utility/text-writer";
 //import Flickity from 'flickity';
@@ -14,32 +18,25 @@ import jsonFooter from "../data-json/section-footer.json";
 import jsonAbout from "../data-json/section-about.json";
 import jsonPartner from "../data-json/section-partners.json";
 import jsonGallery from "../data-json/section-gallery.json";
-//require.context("../assets", false, /\.(svg|png|jpe?g|gif)$/i)
-// const images = importAll(require.context("../assets", false, /\.(svg|png|jpe?g|gif)$/i));
-// function importAll(r) {
-//   let images = {};
-//   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-//   return images;
-// }
 
-const firebase = new FirebaseInit();
+require.context("../assets", false, /\.(png|jpe?g)$/i);
 
 window.onload = () => {
   runHeaderControl();
   runJarallax();
-  runScrollax();
-  runAos();
+  //runScrollax();
   writeCopywrite();
   prepareHero();
   prepareAbout();
   prepareServices();
   prepareGallery();
-  runMasonry();
-  createPartners();
+  //runMasonry();
+  //createPartners();
+  prepreQuotation();
   prepareFooter();
-  $("#quote-form").on("submit", quote);
+  runAos();
 
-  //new TxtType(document.getElementById("text-type"),['Cable Detection'])
+  $("#quote-form").on("submit", quote);
 };
 
 function runJarallax() {
@@ -84,17 +81,34 @@ function writeCopywrite() {
 
 function quote(event) {
   event.preventDefault();
+  const firebase = new FirebaseInit();
+
   const username = $("#quote-form input[name=name]").val();
   const email = $("#quote-form input[name=email]").val();
   const message = $("#quote-form input[name=message]").val();
+
+  let query = (operation) => {
+    if (operation) {
+      $("#quote-form button[type=submit]").addClass("query");
+    } else {
+      $("#quote-form button[type=submit]").removeClass("query");
+    }
+    $("#quote-form button[type=submit]").prop("disabled", operation);
+  };
+  query(true);
+
   firebase
     .setDocument(new Quote(username, email, message, false))
     .then(() => {
       alert("successfully submit");
       event.reset();
+      query(false);
+
     })
     .catch((error) => {
       console.log(error);
+      query(false);
+
     });
 }
 
@@ -102,12 +116,15 @@ function quote(event) {
 function prepareHero() {
   $("#hero-landing #hero-carrier").text(jsonUser.carrier);
   $("#hero-landing #hero-pitch").html(jsonUser.pitch.join("<br>"));
-  new TxtType(document.getElementById('hero-name'),[jsonUser.name,jsonUser.nick_name])
+  new TxtType(document.getElementById("hero-name"), [
+    jsonUser.name,
+    jsonUser.nick_name,
+  ]);
 }
 function prepareAbout() {
   $("#about #about-title").html(jsonAbout.title);
   $("#about #about-desc").html(jsonAbout.desc);
-  //$('#about #about-image').attr('src',images['about.jpg']);
+
   const education = valueHtml(
     "Education",
     jsonUser.qualification.join("<br>"),
@@ -120,21 +137,23 @@ function prepareAbout() {
     $("#about-values").append(valueRef);
   }
 }
+
 function createPartners() {
   const list = jsonPartner.partners;
+
   for (let data of list) {
     const col = $.parseHTML(
-      `<div class="col">
+      `<div class="col" >
         <div class="d-flex mb-4 flex-column gap-3 justify-content-start">
           <div>
-            <img class="me-3" src="${data.image}" alt="" height="50" width:"auto"> 
+            <img class="me-3" src="${data.url}" alt="" height="50" width:"auto"> 
           </div>
           <h5>${data.name}</h5> 
         </div>
       </div>`
     );
     const learnMoreBtn = $.parseHTML(
-      `<div> <a class="btn btn-outline-primary " href="${data.link}">Learn more</a> </div>`
+      `<div> <a class="btn btn-sm btn-primary " href="${data.link}">Learn more</a> </div>`
     );
     const txtAdjHeight = $.parseHTML(
       `<div class="d-block position-relative txt-adj-h-container"></div>`
@@ -147,13 +166,13 @@ function createPartners() {
   }
 }
 function prepareServices() {
-  //$('#services #service-image').attr('src',images['service.svg'])
+  //$('#services #service-image').attr('src','assets/service.svg')
 }
-function prepareGallery(){
-  jsonGallery.works.forEach( (work,index) => {
+function prepareGallery() {
+  jsonGallery.works.forEach((work, index) => {
     const gallery = $.parseHTML(
-      `<a class="grid-item" href="#">
-        <img loading="lazy" src="${work.url}" alt="work-gallery-${index+1}">
+      `<a class="grid-item" href="#" >
+        <img loading="lazy" src="${work.url}" alt="work-gallery-${index + 1}">
         <span class="background-color"></span>
         <div class="img-overlay">
             <article class="p-2">
@@ -164,11 +183,24 @@ function prepareGallery(){
       </a>`
     );
 
-    $('#gallery-grid').append(gallery);
-  })
+    $("#gallery-grid").append(gallery);
+  });
+}
+function prepreQuotation() {
+  $("#quotation #quotation-company-address").text(jsonUser.office_address);
+  $("#quotation #quotation-email").text(jsonUser.email);
+  $("#quotation #quotation-email").attr("href", `mailto:${jsonUser.email}`);
+
+  $("#quotation #quotation-phone").text(jsonUser.phone);
+  $("#quotation #quotation-phone").attr("href", `tel:${jsonUser.phone}`);
 }
 function prepareFooter() {
-  $("footer #copyright-txt").html(jsonFooter.copyright_txt);
+  const auther = $.parseHTML(
+    `<a href="login.html" class="text-decoration-none text-reset admin-link ">${jsonFooter.auther}</a>`
+  );
+
+  $("footer #copyright-txt").append(auther);
+  $("footer #copyright-txt").append(jsonFooter.copyright_txt);
   $("footer #footer-company-desc").text(jsonFooter.company_desc);
   $("footer #footer-company-address").text(jsonUser.office_address);
   $("footer #footer-email").text(jsonUser.email);
@@ -186,25 +218,12 @@ function prepareFooter() {
   }
 }
 
-function _textAdjustHeight(groupContent, articleTitle, theme) {
-  const longestArticle = theme._articles.reduce(function (a, b) {
-    return a.title.length > b.title.length ? a : b;
-  });
-  $(articleTitle).text(longestArticle.title);
-  $(articleTitle).addClass("position-relative invisible");
-  const c = ".txt-adj-h-container";
-  $(groupContent)
-    .find(c)
-    .each(function () {
-      $(this).find(".article-title").addClass("position-absolute ");
-      $(articleTitle).clone().appendTo(this);
-    });
-}
-
-
 function valueHtml(title, desc, image) {
-  return ` <div class="d-flex p-3 gap-3 align-items-center">
-            <div class="display-2 text-white bg-dark fw-bold m-0 align-self-start p-1 ">${title.substring(0,1)}</div>
+  return ` <div class="d-flex p-3 gap-3 align-items-center" data-aos="fade-right">
+            <div class="display-2 text-white bg-dark fw-bold m-0 align-self-start p-1 ">${title.substring(
+              0,
+              1
+            )}</div>
             <div class="flex-grow-1 ps-3">
               <div class="overflow-hidden">
                   <h5 class="mb-2 lead fw-bold">${title}</h5>
@@ -213,4 +232,3 @@ function valueHtml(title, desc, image) {
             </div>
           </div>`;
 }
-

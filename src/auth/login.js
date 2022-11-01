@@ -1,18 +1,14 @@
 import "../auth/login.scss";
 import {FirebaseInit} from '../utility/firebase';
-import {
-  runHeaderControl,
-} from "../utility/main";
+
 
 const firebase = new FirebaseInit();
-
 firebase.signOut();
 
 window.onload = () => {
-  runHeaderControl();
   $("input[name=name]").val("khinemyaezin");
-  $("input[name=email]").val("khinemyaezin@gmail.com");
-  $("input[name=password]").val("kmz@123!@#");
+  $("input[name=email]").val("admin@cs.com");
+  $("input[name=password]").val("admin123");
 
   $("#signup_form").on("submit", signin);
 };

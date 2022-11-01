@@ -1,12 +1,41 @@
-import { Timestamp } from 'firebase/firestore';
-import moment from 'moment';
+import { Timestamp } from "firebase/firestore";
+import moment from "moment";
+import "jquery";
 
 export function runHeaderControl() {
-  document.addEventListener("scroll", (e) => {
-    if (document.documentElement.scrollTop == 0) {
-      $(".header").removeClass("header-small header-shadow");
-    } else {
-      $(".header").addClass("header-small header-shadow");
+  $(window).scroll(function () {
+    var $w = $(this),
+      st = $w.scrollTop(),
+      navbar = $(".js-navbar"),
+      sd = $(".js-scroll-wrap");
+
+    if (st > 150) {
+      if (!navbar.hasClass("scrolled")) {
+        navbar.addClass("scrolled");
+      }
+    }
+    if (st < 150) {
+      if (navbar.hasClass("scrolled")) {
+        navbar.removeClass("scrolled sleep");
+      }
+    }
+    if (st > 350) {
+      if (!navbar.hasClass("awake")) {
+        navbar.addClass("awake");
+      }
+
+      if (sd.length > 0) {
+        sd.addClass("sleep");
+      }
+    }
+    if (st < 350) {
+      if (navbar.hasClass("awake")) {
+        navbar.removeClass("awake");
+        navbar.addClass("sleep");
+      }
+      if (sd.length > 0) {
+        sd.removeClass("sleep");
+      }
     }
   });
 }

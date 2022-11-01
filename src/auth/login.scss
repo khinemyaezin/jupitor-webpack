@@ -1,1 +1,22 @@
 @import "../style.scss";
+main {
+    min-height: 100vh;
+}
+.card.blur {
+    background-color: rgba(255, 255, 255, 89%);
+}
+.bg-holder {
+    //background-image: url('assets/hero.svg');
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    backface-visibility: hidden;
+}

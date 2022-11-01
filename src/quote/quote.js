@@ -11,8 +11,8 @@ import { FirebaseInit } from "../utility/firebase";
 import QuoteService from "../utility/quote-query";
 import "bootstrap/js/dist/collapse";
 import 'bootstrap/js/dist/offcanvas';
-import { easepick, RangePlugin, TimePlugin } from "@easepick/bundle";
 import Dropdown from "bootstrap/js/dist/dropdown";
+import { easepick, RangePlugin, TimePlugin } from "@easepick/bundle";
 
 // init dao;
 const firebase = new FirebaseInit();
@@ -38,9 +38,8 @@ window.onload = async () => {
       prepareNextSearch();
       prepareReset();
 
-      // queryState(true);
-      // quoteService.onFirstData([]).then(renderQuote);
-      prepareDemo();
+      queryState(true);
+      quoteService.onFirstData([]).then(renderQuote);
     }
   });
 };
@@ -51,8 +50,9 @@ function prepareFilterDropdown() {
 
 function renderQuote(snapshot) {
   if (snapshot) {
+    const rowCount = $("#quote-tbody tr").length;
     snapshot.docs.forEach((doc, i) => {
-      const row = prepareRow(setQuoteFromQuery(doc.id, doc.data()), i);
+      const row = prepareRow(setQuoteFromQuery(doc.id, doc.data()), (rowCount+i+1));
       $("#quote-tbody").append(row);
     });
   } else {
@@ -79,10 +79,13 @@ function prepareNav() {
   });
 }
 
-function prepareRow(quote, index) {
+function prepareRow(quote, rowCount) {
   if (!quote instanceof Quote) throw new Error("Invalid quote");
 
   let row = $.parseHTML(`<tr></tr>`);
+
+  const no = $.parseHTML(`<td class="td-no">${rowCount}</td>`);
+  $(no).appendTo(row);
 
   const name = $.parseHTML(`<td class="td-username">${quote.username}</td>`);
   $(name).appendTo(row);
@@ -223,7 +226,7 @@ function prepareReset() {
   $("#filter-reset-btn").on("click", () => {
     document.getElementById("filter-box-form").reset();
     queryState(true);
-
+    $('#quote-tbody').html('')
     quoteService.onFirstData([]).then(renderQuote);
     filterDropdown.toggle();
   });
@@ -239,6 +242,15 @@ function queryState(operation) {
 
 function prepareDemo() {
   [
+    new Quote("kmz", "kmz@gmail.com", "hello", false),
+    new Quote("kmz", "kmz@gmail.com", "hello", false),
+    new Quote("kmz", "kmz@gmail.com", "hello", false),
+    new Quote("kmz", "kmz@gmail.com", "hello", false),
+    new Quote("kmz", "kmz@gmail.com", "hello", false),
+    new Quote("kmz", "kmz@gmail.com", "hello", false),
+    new Quote("kmz", "kmz@gmail.com", "hello", false),
+    new Quote("kmz", "kmz@gmail.com", "hello", false),
+    new Quote("kmz", "kmz@gmail.com", "hello", false),
     new Quote("kmz", "kmz@gmail.com", "hello", false),
     new Quote("kmz", "kmz@gmail.com", "hello", false),
     new Quote("kmz", "kmz@gmail.com", "hello", false),

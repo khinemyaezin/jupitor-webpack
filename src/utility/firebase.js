@@ -13,17 +13,15 @@ import {
   setDoc,
   doc,
   query,
-  where,
-  orderBy,
   limit,
   startAfter,
   endBefore,
   limitToLast,
 } from "firebase/firestore";
-const {
-  initializeAppCheck,
-  ReCaptchaV3Provider,
-} = require("firebase/app-check");
+// const {
+//   initializeAppCheck,
+//   ReCaptchaV3Provider,
+// } = require("firebase/app-check");
 
 import { Quote } from "./model-quote";
 
@@ -67,7 +65,7 @@ export class FirebaseInit {
   }
 
   get operators() {
-    return ["<", "<=", "==", "!=", ">=", ">"];
+    return ["=="];
   }
 
   async signUp(email, password) {

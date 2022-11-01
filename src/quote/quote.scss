@@ -42,14 +42,17 @@ main {
     tr {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 0.1fr);
 
     }
     tr:not(:last-child){
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid $gray-300;
     }
     td {
       border: none;
+    }
+    td.td-no {
+      display: none;
     }
     td.td-email {
       grid-column-start: 1;
@@ -77,8 +80,6 @@ main {
       grid-column-end: 5;
       grid-row-start: 3;
       grid-row-end: 4;
-      padding: 1rem;
-      background-color: $light;
     }
     td.td-resolve {
       grid-column-start: 4;
