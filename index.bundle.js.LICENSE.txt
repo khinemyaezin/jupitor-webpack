@@ -11,6 +11,18 @@
   */
 
 /*!
+  * Bootstrap carousel.js v5.2.2 (https://getbootstrap.com/)
+  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+/*!
+  * Bootstrap collapse.js v5.2.2 (https://getbootstrap.com/)
+  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+/*!
   * Bootstrap component-functions.js v5.2.2 (https://getbootstrap.com/)
   * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -65,7 +77,19 @@
   */
 
 /*!
+  * Bootstrap scrollspy.js v5.2.2 (https://getbootstrap.com/)
+  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+/*!
   * Bootstrap selector-engine.js v5.2.2 (https://getbootstrap.com/)
+  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+/*!
+  * Bootstrap swipe.js v5.2.2 (https://getbootstrap.com/)
   * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -77,24 +101,10 @@
  */
 
 /*!
- * Masonry v4.2.2
- * Cascading grid layout library
- * https://masonry.desandro.com
- * MIT License
- * by David DeSandro
- */
-
-/*!
  * Name    : Video Worker
  * Version : 2.0.0
  * Author  : nK <https://nkdev.info>
  * GitHub  : https://github.com/nk-o/video-worker
- */
-
-/*!
- * Outlayer v2.1.1
- * the brains and guts of a layout library
- * MIT license
  */
 
 /*!
@@ -106,18 +116,6 @@
  * https://js.foundation/
  *
  * Date: 2021-02-16
- */
-
-/*!
- * getSize v2.0.3
- * measure size of elements
- * MIT license
- */
-
-/*!
- * imagesLoaded v5.0.0
- * JavaScript is all like "You images are done yet or what?"
- * MIT License
  */
 
 /*!
