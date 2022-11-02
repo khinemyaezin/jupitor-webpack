@@ -38,6 +38,8 @@ export function runHeaderControl() {
       }
     }
   });
+
+  
 }
 export function formatDate(jsdate) {
   const aMoment = moment(jsdate);

@@ -21,7 +21,7 @@ async function signin(event) {
   firebase
     .signIn(email, password)
     .then(() => {
-      window.location.replace("/quote.html");
+      window.location.replace("quote.html");
 
     })
     .catch((error) => {

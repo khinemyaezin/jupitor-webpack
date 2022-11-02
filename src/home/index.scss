@@ -4,12 +4,6 @@ section {
   padding: 4rem 0 4rem 0;
   position: relative;
 }
-.container {
-  @include media-breakpoint-down(sm) {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
 
 .jarallax {
   position: relative;
@@ -127,6 +121,9 @@ section {
   }
   .service-wrapper {
     padding-right: 70px;
+    @include media-breakpoint-down(sm){
+      padding-right: 0px;
+    }
   }
   .service-image {
     --img-height: 100%;
@@ -154,7 +151,7 @@ section {
   }
   .shape-parent {
     position: absolute;
-    right: 1rem;
+    right: 0rem;
     top: 50%;
     z-index: 0;
     .background {
@@ -521,7 +518,10 @@ section {
     margin-top: -40px !important;
   }
   .ms-70 {
-    margin-left: 70px !important;
+    margin-left: 70px;
+    @include media-breakpoint-down(sm){
+      margin: 0;
+    }
   }
   .pb-75 {
     padding-bottom: 75px !important;
@@ -644,7 +644,7 @@ section {
 }
 .footer {
   position: relative;
-  background-color: $gray-900;
+  background-color: $black;
   //background-image: url("assets/lines.svg");
   .container {
     color: $white;

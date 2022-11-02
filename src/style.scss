@@ -4,7 +4,7 @@ $font-pt: "PT Serif", serif;
 $white: #ffffff;
 $enable-gradients: true;
 $primary: #fa7b03;
-
+//$secondary: rgba(255, 145, 0, 0.51);
 // $theme-colors: (
 //     "light":      #fffbf5,
 //     "dark":       #1f2021,
@@ -56,7 +56,7 @@ img {
 .brand-logo {
   content: url("assets/logo.svg");
   width: 100%;
-  height: 32px;
+  height: 45px;
 }
 .bg-box {
   .box {
@@ -136,7 +136,7 @@ img {
   bottom: 0;
   left: 0;
 }
-.btn.btn-primary {
+/*.btn.btn-primary {
   border: var(--#{$prefix}btn-border-width) solid $black;
   cursor: pointer;
   position: relative;
@@ -166,6 +166,11 @@ img {
     padding: 13px 50px 13px;
   }
 
+  .spinner-border {
+    display: none;
+  }
+}*/
+.btn {
   .spinner-border {
     display: none;
   }
@@ -256,13 +261,13 @@ img {
     padding-right: 15px;
   }
   .container {
-    width: 1110px;
     margin: 0 auto;
     padding: 0;
+    display: flex;
+    display: -webkit-flex;
     @include media-breakpoint-up(lg) {
     }
   }
-
   .navbar-brand {
     color: $white;
     padding-top: 0.7rem;
@@ -332,40 +337,12 @@ img {
             }
           }
         }
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(sm) {
           padding-left: 0;
           padding-right: 0;
           padding-bottom: 1rem;
           padding-top: 0;
           color: $white;
-        }
-      }
-
-      &.cta {
-        > a {
-          color: $white;
-          border: 1px solid $primary;
-          padding-top: 0.7rem;
-          padding-bottom: 0.7rem;
-          padding-left: 18px;
-          padding-right: 18px;
-          background: $primary;
-          margin-top: 0;
-          @include border-radius(5px);
-          span {
-            display: inline-block;
-            color: $white;
-          }
-          &:hover {
-            background: $primary;
-            border: 1px solid $primary;
-          }
-        }
-        &.cta-colored {
-          a {
-            border: 1px solid $secondary;
-            background: $secondary !important;
-          }
         }
       }
 
@@ -390,6 +367,7 @@ img {
             color: $primary;
           }
         }
+        text-align: center;
       }
     }
   }
@@ -418,7 +396,8 @@ img {
     left: 0;
     top: 0;
     margin-top: -130px;
-    background: $black !important;
+    backdrop-filter: saturate(200%) blur(30px);
+    background-color: hsl(0deg 0% 0% / 80%) !important;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     padding: 0 15px;
     .nav-item {
@@ -433,28 +412,6 @@ img {
       &.active {
         > a {
           color: $primary !important;
-        }
-      }
-      &.cta {
-        > a {
-          color: $white !important;
-          background: $primary;
-          border: none !important;
-          padding-top: 0.5rem !important;
-          padding-bottom: 0.5rem !important;
-          padding-left: 20px !important;
-          padding-right: 20px !important;
-          margin-top: 5px !important;
-          @include border-radius(5px);
-          span {
-            display: inline-block;
-            color: $white !important;
-          }
-        }
-        &.cta-colored {
-          span {
-            border-color: $primary;
-          }
         }
       }
     }
@@ -500,6 +457,49 @@ img {
     }
   }
 }
+// Troggle Menu
+.menu {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+  .line {
+    fill: none;
+    stroke: $white;
+    stroke-width: 6;
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+      stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .line1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+  }
+  .line2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 6;
+  }
+  .line3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+  }
+  &.opened .line1 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+  }
+  &.opened .line2 {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: -30;
+    stroke-width: 6;
+  }
+  &.opened .line3 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+  }
+}
+
 .card {
   border: none;
   box-sizing: border-box;
@@ -649,12 +649,12 @@ img {
   .flexbin > * {
     position: relative;
     display: block;
-    height: 100px;
+    height: 300px;
     margin: 2.5px;
     flex-grow: 1;
   }
   .flexbin > * > img {
-    height: 100px;
+    height: 300px;
     object-fit: cover;
     max-width: 100%;
     min-width: 100%;
@@ -663,4 +663,44 @@ img {
   .flexbin.flexbin-margin {
     margin: 2.5px;
   }
+}
+/* Menu */
+.menu-wrap {
+	position: relative;
+	bottom: 0;
+	left: 0;
+	z-index: 1001;
+	width: 100%;
+	//height: 160px;
+	//-webkit-transform: translate3d(0,160px,0);
+	//transform: translate3d(0,160px,0);
+	//-webkit-transition: -webkit-transform 0.4s;
+	//transition: transform 0.4s;
+}
+
+/* Morph Shape */
+.morph-shape {
+  position: absolute;
+  width: 100%;
+  //width: calc(100% + 400px);
+  height: 100%;
+  top: 0;
+  left: 0;
+  fill: #000000;
+  -webkit-transition: -webkit-transform 0.4s;
+  transition: transform 0.4s;
+  -webkit-transform: translate3d(-400px, 0, 0);
+  transform: translate3d(-400px, 0, 0);
+}
+
+/* Shown menu */
+.show .menu-wrap,
+.show .morph-shape{
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.show .menu-wrap{
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
 }

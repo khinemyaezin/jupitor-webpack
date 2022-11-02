@@ -7,14 +7,9 @@ module.exports = {
     index: "./src/home/index.js",
     signup: "./src/auth/signup.js",
     login: "./src/auth/login.js",
-    test: "./src/test/test.js",
     quote: "./src/quote/quote.js",
   },
-  resolve: {
-    alias: {
-      assets: path.resolve(__dirname, "src/assets"),
-    },
-  },
+  
   devtool: "inline-source-map",
   devServer: {
     static: "./dist",
@@ -58,8 +53,13 @@ module.exports = {
         test: /\.svg$/,
         type: "asset",
         use: "svgo-loader",
-      },
+      }
     ],
+  },
+  resolve: {
+    alias: {
+      assets: path.resolve(__dirname, "src/assets"),
+    },
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -93,13 +93,6 @@ module.exports = {
       template: "src/quote/quote.html",
       scriptLoading: "module",
       chunks: ["quote"],
-    }),
-    new HtmlWebpackPlugin({
-      title: "Test",
-      filename: "test.html",
-      template: "src/test/test.html",
-      scriptLoading: "module",
-      chunks: ["test"],
     }),
   ],
   output: {

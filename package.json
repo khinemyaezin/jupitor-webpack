@@ -21,6 +21,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "img-loader": "^4.0.0",
+    "imports-loader": "^4.0.1",
     "json-loader": "^0.5.7",
     "postcss-loader": "^7.0.1",
     "sass": "^1.55.0",
@@ -53,6 +54,8 @@
     "moment": "^2.29.4",
     "paginationjs": "^2.1.5",
     "rxjs": "^7.5.7",
-    "scrollax": "^1.0.0"
+    "scrollax": "^1.0.0",
+    "snapsvg": "^0.5.1",
+    "snapsvg-cjs": "0.0.6"
   }
 }

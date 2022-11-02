@@ -1,10 +1,10 @@
 import "../home/index.scss";
 import "jquery";
 import { jarallax } from "jarallax";
-import Scrollax from "scrollax";
 import Aos from "aos";
 import { runHeaderControl } from "../utility/main";
 import { FirebaseInit } from "../utility/firebase";
+
 import "bootstrap/js/dist/offcanvas";
 import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/scrollspy";
@@ -39,37 +39,38 @@ window.onload = () => {
   $("#quote-form").on("submit", quote);
 };
 
+
 function runJarallax() {
   jarallax($(".jarallax"), {
     speed: 0.2,
   });
 }
 
-function runMasonry() {
-  /** Masonry */
-  // const gridRef = document.querySelector(".grid");
-  // const moasonry = new Masonry(gridRef, {
-  //   itemSelector: ".grid-item",
-  //   percentPosition: true,
-  //   columnWidth: '.grid-sizer',
-  //   gutter: 10,
-  //   stagger: 30,
-  //   originLeft:false
-  // });
-  // imagesLoaded(gridRef).on("progress", function () {
-  //   moasonry.layout();
-  // });
-}
+// function runMasonry() {
+//   /** Masonry */
+//   // const gridRef = document.querySelector(".grid");
+//   // const moasonry = new Masonry(gridRef, {
+//   //   itemSelector: ".grid-item",
+//   //   percentPosition: true,
+//   //   columnWidth: '.grid-sizer',
+//   //   gutter: 10,
+//   //   stagger: 30,
+//   //   originLeft:false
+//   // });
+//   // imagesLoaded(gridRef).on("progress", function () {
+//   //   moasonry.layout();
+//   // });
+// }
 
-function runScrollax() {
-  const parallax = new Scrollax();
-  parallax.options = {
-    horizontal: false, // Enable for horizontal scrolling.
-    offset: 0, // Target area offset from start (top in vert., left in hor.).
-  };
-  // Initialize Scrollax instance
-  parallax.init();
-}
+// function runScrollax() {
+//   const parallax = new Scrollax();
+//   parallax.options = {
+//     horizontal: false, // Enable for horizontal scrolling.
+//     offset: 0, // Target area offset from start (top in vert., left in hor.).
+//   };
+//   // Initialize Scrollax instance
+//   parallax.init();
+// }
 
 function runAos() {
   Aos.init();
@@ -121,6 +122,7 @@ function prepareHero() {
     jsonUser.nick_name,
   ]);
 }
+
 function prepareAbout() {
   $("#about #about-title").html(jsonAbout.title);
   $("#about #about-desc").html(jsonAbout.desc);
@@ -165,13 +167,15 @@ function createPartners() {
     $("#partners-list-ref").append(col);
   }
 }
+
 function prepareServices() {
   //$('#services #service-image').attr('src','assets/service.svg')
 }
+
 function prepareGallery() {
   jsonGallery.works.forEach((work, index) => {
     const gallery = $.parseHTML(
-      `<a class="grid-item" href="#" >
+      `<div class="grid-item" href="#" >
         <img loading="lazy" src="${work.url}" alt="work-gallery-${index + 1}">
         <span class="background-color"></span>
         <div class="img-overlay">
@@ -180,12 +184,13 @@ function prepareGallery() {
                 <div class="subtitle">${work.desc}</div>
             </article>
         </div>
-      </a>`
+      </div>`
     );
 
     $("#gallery-grid").append(gallery);
   });
 }
+
 function prepreQuotation() {
   $("#quotation #quotation-company-address").text(jsonUser.office_address);
   $("#quotation #quotation-email").text(jsonUser.email);
@@ -194,6 +199,7 @@ function prepreQuotation() {
   $("#quotation #quotation-phone").text(jsonUser.phone);
   $("#quotation #quotation-phone").attr("href", `tel:${jsonUser.phone}`);
 }
+
 function prepareFooter() {
   const auther = $.parseHTML(
     `<a href="login.html" class="text-decoration-none text-reset admin-link ">${jsonFooter.auther}</a>`
