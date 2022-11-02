@@ -10,17 +10,25 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark js-navbar site-navbar-target" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark js-navbar site-navbar-target" id="nav-bar">
         <div class="container">
-            <a class="navbar-brand" href="https://khinemyaezin.com/projects/jupitor2/index.html">
-                <img class="brand-logo" />
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand" href="index.html"><img class="brand-logo" /></a>
+            <button class="menu navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse"
+                data-bs-target="#nav-collapse" aria-controls="nav-collapse" aria-expanded="false"
+                aria-label="Toggle navigation"
+                onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))"
+                aria-label="Main Menu">
+                <svg width="45" height="45" viewBox="0 0 100 100">
+                    <path class="line line1"
+                        d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+                    <path class="line line2" d="M 20,50 H 80" />
+                    <path class="line line3"
+                        d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+                </svg>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+            <div class="collapse navbar-collapse" id="nav-collapse">
+
+                <ul class="navbar-nav nav ml-auto">
                     <li class="nav-item dropdown ">
                         <div class="icontext me-4 dropdown-toggle" style="max-width: 210px;" type="button"
                             data-bs-toggle="dropdown" aria-expanded="false">

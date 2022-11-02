@@ -1,6 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const devMode = process.env.NODE_ENV !== "production";
+
 module.exports = {
   mode: "development",
   entry: {
@@ -9,28 +13,59 @@ module.exports = {
     login: "./src/auth/login.js",
     quote: "./src/quote/quote.js",
   },
-  
-  devtool: "inline-source-map",
+
+  //devtool: "inline-source-map",
   devServer: {
     static: "./dist",
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+    }),
+    new HtmlWebpackPlugin({
+      title: "Home",
+      filename: "index.html",
+      template: "src/home/index.html",
+      favicon: "src/assets/favicon.ico",
+      scriptLoading: "module",
+      chunks: ["index"],
+    }),
+    new HtmlWebpackPlugin({
+      title: "Signup",
+      filename: "signup.html",
+      template: "src/auth/signup.html",
+      favicon: "src/assets/favicon.ico",
+
+      scriptLoading: "module",
+      chunks: ["signup"],
+    }),
+    new HtmlWebpackPlugin({
+      title: "Login",
+      filename: "login.html",
+      template: "src/auth/login.html",
+      favicon: "src/assets/favicon.ico",
+
+      scriptLoading: "module",
+      chunks: ["login"],
+    }),
+    new HtmlWebpackPlugin({
+      title: "Quote",
+      filename: "quote.html",
+      template: "src/quote/quote.html",
+      favicon: "src/assets/favicon.ico",
+
+      scriptLoading: "module",
+      chunks: ["quote"],
+    }),
+  ].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
   module: {
     rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [["@babel/preset-env", { targets: "defaults" }]],
-          },
-        },
-      },
       {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
-          "style-loader",
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
           // Translates CSS into CommonJS
           "css-loader",
           // Compiles Sass to CSS
@@ -53,7 +88,17 @@ module.exports = {
         test: /\.svg$/,
         type: "asset",
         use: "svgo-loader",
-      }
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [["@babel/preset-env", { targets: "defaults" }]],
+          },
+        },
+      },
     ],
   },
   resolve: {
@@ -61,40 +106,7 @@ module.exports = {
       assets: path.resolve(__dirname, "src/assets"),
     },
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-    }),
-    new HtmlWebpackPlugin({
-      title: "Home",
-      filename: "index.html",
-      template: "src/home/index.html",
-      scriptLoading: "module",
-      chunks: ["index"],
-    }),
-    new HtmlWebpackPlugin({
-      title: "Signup",
-      filename: "signup.html",
-      template: "src/auth/signup.html",
-      scriptLoading: "module",
-      chunks: ["signup"],
-    }),
-    new HtmlWebpackPlugin({
-      title: "Login",
-      filename: "login.html",
-      template: "src/auth/login.html",
-      scriptLoading: "module",
-      chunks: ["login"],
-    }),
-    new HtmlWebpackPlugin({
-      title: "Quote",
-      filename: "quote.html",
-      template: "src/quote/quote.html",
-      scriptLoading: "module",
-      chunks: ["quote"],
-    }),
-  ],
+
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),

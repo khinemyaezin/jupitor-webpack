@@ -26,7 +26,7 @@ window.onload = async () => {
   // Auth
   firebase.watchUser((isAuth) => {
     if (!isAuth) {
-      window.location.replace("/login.html");
+      window.location.replace("login.html");
     } else {
       prepareNav();
       runHeaderControl();
@@ -66,7 +66,6 @@ function setQuoteFromQuery(id, doc) {
   let quote = new Quote(doc.username, doc.email, doc.message, doc.resolve);
   quote.docId = id;
   quote.timestamp = doc.timestamp;
-  console.log(quote);
   return quote;
 }
 

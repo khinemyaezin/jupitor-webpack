@@ -21,10 +21,11 @@ import jsonGallery from "../data-json/section-gallery.json";
 
 require.context("../assets", false, /\.(png|jpe?g)$/i);
 
+
 window.onload = () => {
+  console.log('dom loaded');
   runHeaderControl();
   runJarallax();
-  //runScrollax();
   writeCopywrite();
   prepareHero();
   prepareAbout();
@@ -35,8 +36,8 @@ window.onload = () => {
   prepreQuotation();
   prepareFooter();
   runAos();
-
   $("#quote-form").on("submit", quote);
+
 };
 
 
@@ -73,7 +74,7 @@ function runJarallax() {
 // }
 
 function runAos() {
-  Aos.init();
+  return Aos.init();
 }
 
 function writeCopywrite() {
@@ -102,7 +103,7 @@ function quote(event) {
     .setDocument(new Quote(username, email, message, false))
     .then(() => {
       alert("successfully submit");
-      event.reset();
+      document.getElementById('quote-form').reset();
       query(false);
 
     })
@@ -173,9 +174,10 @@ function prepareServices() {
 }
 
 function prepareGallery() {
+  const initDelay = 100;
   jsonGallery.works.forEach((work, index) => {
     const gallery = $.parseHTML(
-      `<div class="grid-item" href="#" >
+      `<div class="grid-item" data-aos="zoom-in">
         <img loading="lazy" src="${work.url}" alt="work-gallery-${index + 1}">
         <span class="background-color"></span>
         <div class="img-overlay">

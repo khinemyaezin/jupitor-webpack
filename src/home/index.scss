@@ -4,13 +4,14 @@ section {
   padding: 4rem 0 4rem 0;
   position: relative;
 }
-
 .jarallax {
   position: relative;
   z-index: 0;
   height: 100%;
 }
-
+.form-control {
+  background-color: transparent !important;
+}
 .hero-landing {
   padding: 9.5rem 0 4.75rem 0;
   background-color: $orange-100;
@@ -662,7 +663,7 @@ section {
   #footer-company-address,
   #footer-email,
   #footer-phone {
-    color: $gray-400 !important;
+    color: $gray-300 !important;
   }
 }
 .background {
