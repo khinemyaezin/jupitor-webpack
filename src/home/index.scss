@@ -122,7 +122,7 @@ section {
   }
   .service-wrapper {
     padding-right: 70px;
-    @include media-breakpoint-down(sm){
+    @include media-breakpoint-down(sm) {
       padding-right: 0px;
     }
   }
@@ -180,6 +180,11 @@ section {
   .forward-icon-wrapper .forward-icon:not(:last-child)::after {
     font-family: "bootstrap-icons";
     content: "\F138";
+    font-size: $h5-font-size;
+  }
+  .forward-icon-wrapper .forward-icon:last-child::after {
+    font-family: "bootstrap-icons";
+    content: "\F26B";
     font-size: $h5-font-size;
   }
 }
@@ -503,9 +508,20 @@ section {
     display: flex;
     pointer-events: none;
   }
+  .shape-wrapper {
+    position: relative;
+    padding-bottom: 70px;
+    overflow: hidden;
+  }
   .shape-parent {
     position: relative;
     z-index: 0;
+    margin-left: 70px;
+  }
+  .shape-textbox {
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
   .svg-award {
     content: url("assets/award.svg");
@@ -518,15 +534,7 @@ section {
   .mt-n40 {
     margin-top: -40px !important;
   }
-  .ms-70 {
-    margin-left: 70px;
-    @include media-breakpoint-down(sm){
-      margin: 0;
-    }
-  }
-  .pb-75 {
-    padding-bottom: 75px !important;
-  }
+
   .image-container {
     --img-height: 100%;
     transform: translateY(0px);
@@ -577,20 +585,12 @@ section {
     padding-right: 60px !important;
     padding-left: 60px !important;
   }
-  .mt-n75 {
-    margin-top: -75px !important;
-  }
 }
 .partners {
-  .bg-box {
-    position: relative;
-    transform: translate(60%, 50px);
-  }
-  #partners-list-ref {
-    @include media-breakpoint-down(sm) {
-      flex-direction: column;
-      gap: 2.5rem;
-    }
+  img {
+    min-height: 60px;
+    width: 60px;
+    object-fit: contain;
   }
 }
 .quotation {
@@ -634,13 +634,16 @@ section {
       box-shadow: none !important;
     }
   }
-  .address-wrapper {
-    padding: 1rem;
-  }
+
   .address {
-    word-break: break-word;
-    height: 100%;
-    padding: 1rem;
+    @include media-breakpoint-down(sm) {
+      text-align: center;
+    }
+  }
+  .address-icon {
+    @include media-breakpoint-down(sm) {
+      margin: auto;
+    }
   }
 }
 .footer {
@@ -653,6 +656,7 @@ section {
   .footer-logo {
     width: 100px !important;
     height: auto !important;
+    content: url('assets/service-left.svg');
   }
   .admin-link {
     &:hover {

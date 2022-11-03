@@ -21,9 +21,8 @@ import jsonGallery from "../data-json/section-gallery.json";
 
 require.context("../assets", false, /\.(png|jpe?g)$/i);
 
-
 window.onload = () => {
-  console.log('dom loaded');
+  console.log("dom loaded");
   runHeaderControl();
   runJarallax();
   writeCopywrite();
@@ -32,14 +31,12 @@ window.onload = () => {
   prepareServices();
   prepareGallery();
   //runMasonry();
-  //createPartners();
+  createPartners();
   prepreQuotation();
   prepareFooter();
   runAos();
   $("#quote-form").on("submit", quote);
-
 };
-
 
 function runJarallax() {
   jarallax($(".jarallax"), {
@@ -103,14 +100,12 @@ function quote(event) {
     .setDocument(new Quote(username, email, message, false))
     .then(() => {
       alert("successfully submit");
-      document.getElementById('quote-form').reset();
+      document.getElementById("quote-form").reset();
       query(false);
-
     })
     .catch((error) => {
       console.log(error);
       query(false);
-
     });
 }
 
@@ -146,25 +141,15 @@ function createPartners() {
 
   for (let data of list) {
     const col = $.parseHTML(
-      `<div class="col" >
-        <div class="d-flex mb-4 flex-column gap-3 justify-content-start">
-          <div>
-            <img class="me-3" src="${data.url}" alt="" height="50" width:"auto"> 
-          </div>
-          <h5>${data.name}</h5> 
+      `<div class="col">
+        <div class="card card-body card-hover h-100 border-0 bg-primary bg-opacity-10" data-aos="zoom-in">
+          <img class="d-block mb-3" src="${data.url}" alt="${data.name}">
+          <h6 class="fw-bold">${data.name}</h6>
+          <p class="fs-sm mb-0">${data.desc}</p>
         </div>
       </div>`
     );
-    const learnMoreBtn = $.parseHTML(
-      `<div> <a class="btn btn-sm btn-primary " href="${data.link}">Learn more</a> </div>`
-    );
-    const txtAdjHeight = $.parseHTML(
-      `<div class="d-block position-relative txt-adj-h-container"></div>`
-    );
-    const detail = $.parseHTML(`<p class="font-pt">${data.detail}</p>`);
-    $(txtAdjHeight).append(detail);
-    $(txtAdjHeight).append(learnMoreBtn);
-    $(col).append(txtAdjHeight);
+    
     $("#partners-list-ref").append(col);
   }
 }
@@ -200,6 +185,14 @@ function prepreQuotation() {
 
   $("#quotation #quotation-phone").text(jsonUser.phone);
   $("#quotation #quotation-phone").attr("href", `tel:${jsonUser.phone}`);
+
+  for (let social of jsonUser.socials) {
+    $("#quotation #quotation-socials").append(
+      $.parseHTML(
+        `<a class="${social.icon} text-muted text-decoration-none p-2 bg-white rounded-3" href="${social.href}"></a>`
+      )
+    );
+  }
 }
 
 function prepareFooter() {

@@ -2,19 +2,8 @@ $enable-rounded: false;
 $font-family-base: "Inter", sans-serif;
 $font-pt: "PT Serif", serif;
 $white: #ffffff;
-$enable-gradients: true;
+$enable-gradients: false;
 $primary: #fa7b03;
-//$secondary: rgba(255, 145, 0, 0.51);
-// $theme-colors: (
-//     "light":      #fffbf5,
-//     "dark":       #1f2021,
-//     "primary":    #ff7d01,
-//     "secondary":  #9bb9ff,
-//     "info":       #3468ec,
-//     "success":    #5ec000,
-//     "warning":    #ffc97a,
-//     "danger":     #ff0065,
-// );
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap");
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -170,6 +159,9 @@ img {
     display: none;
   }
 }*/
+.btn.btn-primary {
+  color: $white !important;
+}
 .btn {
   .spinner-border {
     display: none;
@@ -573,7 +565,17 @@ img {
 .opacity-5 {
   opacity: 0.5;
 }
+.bi-facebook:hover {
+  color: $blue !important;
+}
+.bi-linkedin:hover {
+  color: $blue !important;
+}
+.bi-instagram:hover {
+  color: $red !important;
+}
 
+// Flexbin
 .flexbin {
   display: flex;
   overflow: hidden;
@@ -664,44 +666,4 @@ img {
   .flexbin.flexbin-margin {
     margin: 2.5px;
   }
-}
-/* Menu */
-.menu-wrap {
-  position: relative;
-  bottom: 0;
-  left: 0;
-  z-index: 1001;
-  width: 100%;
-  //height: 160px;
-  //-webkit-transform: translate3d(0,160px,0);
-  //transform: translate3d(0,160px,0);
-  //-webkit-transition: -webkit-transform 0.4s;
-  //transition: transform 0.4s;
-}
-
-/* Morph Shape */
-.morph-shape {
-  position: absolute;
-  width: 100%;
-  //width: calc(100% + 400px);
-  height: 100%;
-  top: 0;
-  left: 0;
-  fill: #000000;
-  -webkit-transition: -webkit-transform 0.4s;
-  transition: transform 0.4s;
-  -webkit-transform: translate3d(-400px, 0, 0);
-  transform: translate3d(-400px, 0, 0);
-}
-
-/* Shown menu */
-.show .menu-wrap,
-.show .morph-shape {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.show .menu-wrap {
-  -webkit-transition-delay: 0s;
-  transition-delay: 0s;
 }

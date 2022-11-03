@@ -38,8 +38,9 @@ window.onload = async () => {
       prepareNextSearch();
       prepareReset();
 
-      queryState(true);
-      quoteService.onFirstData([]).then(renderQuote);
+      //queryState(true);
+      //quoteService.onFirstData([]).then(renderQuote);
+      prepareDemo();
     }
   });
 };
