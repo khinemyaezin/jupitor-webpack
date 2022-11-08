@@ -1,6 +1,7 @@
 import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 import "jquery";
+import StorageQuery from "./storage-query";
 
 export function runHeaderControl() {
   $(window).scroll(function () {
@@ -38,8 +39,6 @@ export function runHeaderControl() {
       }
     }
   });
-
-  
 }
 export function formatDate(jsdate) {
   const aMoment = moment(jsdate);
@@ -56,4 +55,142 @@ export function getEndOfDay(date) {
   let myDate = date;
   myDate.setHours(23, 59, 59, 999);
   return Timestamp.fromDate(myDate);
+}
+export function readFile(f) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(f);
+  });
+}
+
+export function getBase64FileType(base64) {
+  let parts = base64.split(",");
+  const regex = new RegExp("(/)(.*);");
+  var matched = regex.exec(parts[0]);
+  return "." + matched[2];
+}
+export function getFileNameWithExt(f) {
+  const name = f.name;
+  const lastDot = name.lastIndexOf(".");
+
+  const fileName = name.substring(0, lastDot);
+  const ext = name.substring(lastDot + 1);
+
+  return {
+    name: fileName,
+    ext: ext,
+  };
+}
+export function getBase64Image(img) {
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  var dataURL = canvas.toDataURL("image/png");
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+export function isBase64(str) {
+  if (str === "" || str.trim() === "") {
+    return false;
+  }
+  try {
+    return btoa(atob(str)) == str;
+  } catch (err) {
+    return false;
+  }
+}
+
+/**
+ *
+ * @param { string } source
+ * @param { StorageQuery } storageQuery
+ * @param { string } name
+ */
+export function prepareMedia(storageQuery, source, name) {
+  // source could be url or base64 string
+  if (source.startsWith("http")) {
+    return new Promise((res, rej) => res(source));
+  } else {
+    return storageQuery.uploadFile(
+      source,
+      `${name}${getBase64FileType(source)}`
+    );
+  }
+}
+
+/**
+ *
+ * @param {string} title
+ * @param {string} message
+ * @param {function} callback
+ * @param {Array} buttons
+ * @returns
+ */
+export function dialog(title, message, callback, buttons=[] ) {
+  
+  const dialogEl = document.createElement("dialog");
+  const formEl = $.parseHTML(
+    `<form method="dialog">
+      <h2>${title}</h2>
+      <p>${message}</p>
+      <div class="d-flex pt-2 gap-2 justify-content-end">
+          ${buttons.map( b=>{
+            return `<button class="btn btn-${b.priority}" value="${b.value}">${b.title}</button>`;
+          }).join('')}
+      </div>
+    </form>`
+  );
+
+  $(dialogEl).append(formEl);
+  $(dialogEl).on("close", () => {
+    const returnValue = dialogEl.returnValue;
+    $(dialogEl).remove();
+    callback(returnValue);
+  });
+  $("body").append(dialogEl);
+  return dialogEl;
+}
+
+/**
+ *
+ * @param {string} title
+ * @param {string} message
+ * @param {function} callback
+ * @returns
+ */
+export function loadingEl() {
+  const dialogEl = document.createElement("dialog");
+  $(dialogEl).addClass("loading-dialog");
+  const formEl = $.parseHTML(
+    `<div class="d-flex justify-content-between align-items-center">
+      <span id="dialog-progress-value" class="text-capitalize"></span>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>`
+  );
+
+  $(dialogEl).append(formEl);
+
+  $("body").append(dialogEl);
+  return {
+    present: ( message ) => {
+      dialogEl.showModal();
+      $(formEl).find("#dialog-progress-value").html(message);
+      return new Promise((rs) => {
+        setTimeout(() => {
+          rs();
+        }, 3000);
+      });
+    },
+    progress: (value) => {
+      $(formEl).find("#dialog-progress-value").html(value);
+    },
+    close: () => {
+      dialogEl.close();
+    },
+  };
 }
