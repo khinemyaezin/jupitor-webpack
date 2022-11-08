@@ -37,6 +37,7 @@ const social = [
   { icon: "bi bi-facebook", title: "Facebook" },
   { icon: "bi bi-linkedin", title: "LinkedIn" },
   { icon: "bi bi-whatsapp", title: "Whatsapp" },
+  { icon: "bi bi-wechat", title: "Wechat" },
 ];
 const processIcons = [
   { icon: "bi bi-chat-left-fill", html: "&#xF24E" },
@@ -50,7 +51,11 @@ let storageQuery = new StorageQuery(firebaseInit);
 const el = loadingEl();
 
 window.onload = async () => {
-
+  firebaseInit.watchUser((isAuth) => {
+    if (!isAuth) {
+      window.location.replace("login.html");
+    }
+  });
   el.present();
   el.progress("Please wait..");
 
@@ -85,29 +90,10 @@ window.onload = async () => {
   contact.prepare(page?.contact);
 
   el.close();
-  
+
   // Firebase
   $("#btn-submit").on("click", async () => {
     await el.present("Do not close the browser");
-    /*
-    await Promise.all([
-      hero.exports(),
-      about.exports(),
-      gallery.exports(),
-      service.exports(),
-      partner.exports(),
-    ]).then((promise) => {
-      console.log(promise);
-      newPage['section_hero'] = promise[0];
-      newPage['section_about'] = promise[1];
-      newPage['section_gallery'] = promise[2];
-      newPage['section_service'] = promise[3];
-      newPage['section_partner'] = promise[4];
-      newPage['section_quotation'] = quotation.exports();
-      newPage['section_footer'] = footer.exports();
-      newPage['contact'] = contact.exports();
-    });
-    */
     const newPage = {
       section_hero: await hero.exports(),
       section_about: await about.exports(),
@@ -119,8 +105,8 @@ window.onload = async () => {
       contact: contact.exports(),
     };
 
-    console.log(newPage);
     el.progress("Preparing data");
+
     for (const key in newPage) {
       const ref = doc(firebaseInit.getDb, "page", key);
       await setDoc(ref, newPage[key], { merge: true })
@@ -130,15 +116,21 @@ window.onload = async () => {
         })
         .catch((e) => console.log(e));
     }
+    
     el.close();
-    dialog("Successfully saved!","Enjoy your new website.",(rs)=>{
-      if(rs === 'go&check') {
-        window.location.replace("index.html");
-      }
-    },[
-      {title:'Go & check',value:'go&check', priority:'primary'},
-      {title:'No thanks',value:'no', priority:'outline-primary'}
-    ]).showModal();
+    dialog(
+      "Successfully saved!",
+      "Enjoy your new website.",
+      (rs) => {
+        if (rs === "go&check") {
+          window.location.replace("index.html");
+        }
+      },
+      [
+        { title: "Go & check", value: "go&check", priority: "primary" },
+        { title: "No thanks", value: "no", priority: "outline-primary" },
+      ]
+    ).showModal();
   });
 };
 
@@ -586,7 +578,7 @@ class Partner {
 
   htmlPartner(title, desc, base64) {
     return `<div class="col">
-          <div class="card card-body card-hover h-100 border-0 bg-primary bg-opacity-10 position-relative" partner>
+          <div class="card card-body card-hover h-100 border-0 position-relative" partner>
             <button class="position-absolute btn btn-close btn-partner-close"></button>
             <img class="d-block mb-3" src="${base64}" alt="${title}">
             <h6 class="fw-bold" data-partner-title="${title}">${title}</h6>

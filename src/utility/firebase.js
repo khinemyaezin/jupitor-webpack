@@ -47,11 +47,11 @@ export class FirebaseInit {
     this.#db = getFirestore(this.#app);
     this.#storage = getStorage(this.#app);
 
-    // if (location.hostname === "localhost") {
-    //   connectAuthEmulator(this.#auth, "http://localhost:9099");
-    //   connectFirestoreEmulator(this.#db, "localhost", 8080);
-    //   connectStorageEmulator(this.#storage, "localhost", 9199);
-    // }
+    if (location.hostname === "localhost") {
+      connectAuthEmulator(this.#auth, "http://localhost:9099");
+      connectFirestoreEmulator(this.#db, "localhost", 8080);
+      connectStorageEmulator(this.#storage, "localhost", 9199);
+    }
   }
 
   get getCurrentuser() {

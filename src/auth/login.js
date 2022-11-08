@@ -1,12 +1,8 @@
 import "../auth/login.scss";
 import { FirebaseInit } from "../utility/firebase";
-  console.log("init login");
+import { dialog } from "../utility/main";
 
 window.onload = () => {
-  $("input[name=name]").val("khinemyaezin");
-  $("input[name=email]").val("admin@cs.com");
-  $("input[name=password]").val("admin@123");
-
   $("#signup_form").on("submit", signin);
 };
 
@@ -22,6 +18,6 @@ async function signin(event) {
       window.location.replace("quote.html");
     })
     .catch((error) => {
-      alert(error);
+      dialog("User not found","Please try again",()=>{},[{title:'OK',value:'ok',priority:'primary'}]).showModal();
     });
 }

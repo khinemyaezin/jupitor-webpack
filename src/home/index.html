@@ -10,7 +10,7 @@
     <title>Jupitor</title>
 </head>
 
-<body class="">
+<body class="wait">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark js-navbar site-navbar-target" id="nav-bar">
             <div class="container">
@@ -74,7 +74,7 @@
                                     <div class="col-12 col-md-11">
 
                                         <h1 class="text-uppercase fw-bold mb-4" data-aos="fade-right">
-                                            <span class="" id="hero-carrier"></span>
+                                            <span class="underline-brush" id="hero-carrier"></span>
                                         </h1>
                                         <h2 class="text-muted fw-bold" data-aos="fade-right">
                                             <span class="fw-normal">with </span>
@@ -123,7 +123,7 @@
                         <div class="shape-wrapper ">
                             <div class="shape-parent" data-aos="fade-left">
                                 <div class="image-container">
-                                    <img alt="" id="about-image" src="assets/about.jpg">
+                                    <img alt="" id="about-image">
                                 </div>
                             </div>
                             <div class="shape-textbox text-center" data-aos="fade-right">
@@ -230,7 +230,7 @@
                     </div>
                 </div>
             </div>
-            <div class="py-5 ">
+            <div class="pt-5 ">
                 <div class="container">
                     <div class="overflow-hidden">
                         <div class="row g-4 forward-icon-wrapper" id="service-process-row">
@@ -290,7 +290,7 @@
             </div>
         </section>
 
-        <section class="quotation bg-light" id="quotation">
+        <section class="quotation" id="quotation">
             <div class="container">
                 <div class="row mb-5">
                     <div class="col col-lg-6">
@@ -471,28 +471,20 @@
                     </ul>
                 </div>
             </div>
-            <div class="row align-items-center g-0 border-top py-2 mt-6">
-                <div class="col-lg-10 col-12">
-                    <div class="d-lg-flex align-items-center">
-                        <div class="me-4 text-muted small">
-                            <span>
-                                Copyright &copy;
-                                <span id="footer-fullyear"></span>
-                                <span id="copyright-txt"></span>
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
+            <div class=" border-top py-2 mt-6 text-center">
+                <span class="small text-muted">
+                    Copyright &copy;
+                    <span id="footer-fullyear"></span>
+                    <span id="copyright-txt"></span>
+                </span>
             </div>
         </div>
     </footer>
-    
-    <div id="loader-wrapper" class="blur">
-        <div id="loader"></div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
 
+    <div id="loader-wrapper" class="">
+        <div class="loader-position">
+            <span class="loader-pencil"></span>
+        </div>
     </div>
 </body>
 

@@ -102,6 +102,7 @@
     right: 10px;
     top: 10px;
   }
+  
 }
 #quotation {
   #quotation-email-title,#quotation-phone-title,#quotation-social-title {
@@ -124,5 +125,13 @@
   .btn-about-value-close{
     top: 10px;
     right: 10px;
+  }
+}
+form.entry{
+  width: 300px;
+  padding: 2rem 0 2rem 0;
+  @include media-breakpoint-down(sm){
+    width: 100%;
+  
   }
 }

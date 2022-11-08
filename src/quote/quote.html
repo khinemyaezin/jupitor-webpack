@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quotations</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark js-navbar site-navbar-target" id="nav-bar">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm js-navbar site-navbar-target" id="nav-bar">
         <div class="container">
             <a class="navbar-brand" href="index.html"><img class="brand-logo" /></a>
             <button class="menu navbar-toggler nav-toggle" type="button" data-bs-toggle="collapse"
@@ -32,7 +32,7 @@
                     <li class="nav-item"><a href="home-editor.html" class="nav-link"><span>Page editor</span></a></li>
 
                     <li class="nav-item dropdown ">
-                        <div class="icontext me-4 dropdown-toggle" style="max-width: 210px;" type="button"
+                        <div class="icontext me-4 dropdown-toggle" style="max-width: 210px; margin-bottom: 2px;" type="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle nav-link p-0"></i>
                             <div class="text nav-link p-0" id="nav-user-email"> Hi, Username </div>
@@ -55,9 +55,9 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between">
-                    <h3>Quote List</h3>
+                    <h3 class="fw-bold">QUOTATIONS</h3>
                     <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        <button class="btn btn-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" aria-expanded="false" id="filter-dropdown-btn">
                             <span class="spinner-grow spinner-grow-sm d-none" role="status" aria-hidden="true"
                                 id="filter-spinner"></span>
@@ -86,13 +86,16 @@
                                     <label for="filter-date-picker" class="form-label">Date</label>
 
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="filter-date-picker" readonly
+                                        <input type="text" class="form-control" id="filter-date-picker" readonly placeholder="Choose date range"
                                             data-field="timestamp">
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-secondary" id="filter-reset-btn"
-                                    query-disabled-btn>Reset</button>
-                                <button type="submit" class="btn btn-outline-primary" query-disabled-btn>Search</button>
+                                <div class="d-flex gap-3">
+                                    <button type="button" class="btn btn-light" id="filter-reset-btn"
+                                        query-disabled-btn>Reset</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        query-disabled-btn>Search</button>
+                                </div>
 
                             </form>
                         </div>
@@ -115,7 +118,7 @@
                         </tbody>
                     </table>
                     <div id="pagination-container">
-                        <button class="btn btn-outline-primary btn-lg" id="btn-next" query-disabled-btn>next</button>
+                        <button class="btn btn-link" id="btn-next" query-disabled-btn>More</button>
                     </div>
                 </div>
             </div>

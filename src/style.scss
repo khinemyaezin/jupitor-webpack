@@ -64,6 +64,7 @@ $primary: #fa7b03;
 
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import "~aos/dist/aos.css";
+@import "./loaders.scss";
 
 :root {
   --header-outer-height: 100px;
@@ -290,8 +291,7 @@ dialog::backdrop {
   background: rgba(0, 0, 0, 0.515);
 }
 dialog.loading-dialog {
-  backdrop-filter: saturate(200%) blur(30px);
-  background-color: rgba(255, 255, 255, 0.5) !important;
+  background-color: $card-bg;
 }
 
 /*===== NAV BAR =====*/
@@ -320,7 +320,7 @@ dialog.loading-dialog {
     display: flex !important;
     display: -webkit-flex !important;
     justify-content: space-between !important;
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
       flex-direction: row;
     }
   }
@@ -332,7 +332,7 @@ dialog.loading-dialog {
     &:focus {
       color: $white !important;
     }
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       color: $white;
     }
   }
@@ -417,13 +417,16 @@ dialog.loading-dialog {
         }
       }
 
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down(sm) {
         &.active {
           > a {
             color: $primary;
           }
         }
         text-align: center;
+        .dropdown-toggle::after {
+          color: $white !important;
+        }
       }
     }
   }
@@ -459,9 +462,12 @@ dialog.loading-dialog {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     padding: 0 15px;
     .nav-item {
+      .dropdown-toggle::after {
+        color: $white !important;
+      }
       .nav-link {
         color: $white !important;
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(sm) {
           padding-left: 0 !important;
           padding-right: 0 !important;
           padding-bottom: 20px !important;
@@ -473,9 +479,8 @@ dialog.loading-dialog {
         }
       }
     }
-
-    .navbar-nav {
-      @include media-breakpoint-down(md) {
+    .nav-item.dropdown .navbar-nav {
+      @include media-breakpoint-down(sm) {
         background: none;
         border-radius: 0px;
         padding-left: 0 !important;
@@ -574,6 +579,7 @@ dialog.loading-dialog {
   border: none !important;
   box-shadow: $box-shadow;
 }
+//loader
 
 /*===== type write================================*/
 .blinker {

@@ -12,135 +12,16 @@ import "bootstrap/js/dist/carousel";
 
 import { Quote } from "../utility/model-quote";
 import TxtType from "../utility/text-writer";
-//import Flickity from 'flickity';
 
 require.context("../assets", false, /\.(png|jpe?g)$/i);
 const firebase = new FirebaseInit();
-
-// const information = {
-//   section_hero: {
-//     title: "cable detection",
-//     pitch: "my picth",
-//     image_url:
-//       "http://localhost:9199/v0/b/jupitor2-webpack.appspot.com/o/hero.jpg?alt=media&token=aaf753a6-fb93-41d2-a52e-464af02d0b4d",
-//   },
-//   section_about: {
-//     values: [
-//       {
-//         title: "Education",
-//         desc: "educated",
-//       },
-//     ],
-//     project: {
-//       count: "222",
-//       title: "Success",
-//     },
-//     description: "<h1><strong>About Desc</strong></h1>",
-//     image_url:
-//       "http://localhost:9199/v0/b/jupitor2-webpack.appspot.com/o/about.jpg?alt=media&token=74243d9c-4619-4adf-be7e-499339f44959",
-//   },
-//   section_gallery: {
-//     short_desc:
-//       "We are honored to have the opportunity to work with various partners and clients across different sectors and all walks of life. We are always open to new partnerships and provide our expertise to support your firm to achieve greater heights.",
-//     images: [
-//       {
-//         url: "http://localhost:9199/v0/b/jupitor2-webpack.appspot.com/o/gallery_0..jpeg?alt=media&token=22fe8354-a408-40c5-9549-e03fe86942bc",
-//         title: "2",
-//         desc: "2",
-//       },
-//       {
-//         url: "http://localhost:9199/v0/b/jupitor2-webpack.appspot.com/o/gallery_1..webp?alt=media&token=8465aa56-b4bb-4e14-8be8-41578767b81e",
-//         title: "1",
-//         desc: "1",
-//       },
-//     ],
-//   },
-//   section_service: {
-//     image_urls: [
-//       "http://localhost:9199/v0/b/jupitor2-webpack.appspot.com/o/service_0.jpg?alt=media&token=39e5b456-c1f1-42d0-9110-d6eb1d143ff6",
-//       "http://localhost:9199/v0/b/jupitor2-webpack.appspot.com/o/service_1.jpg?alt=media&token=5cf7705a-6d88-4153-bc60-cb8d37fc13a7",
-//       "http://localhost:9199/v0/b/jupitor2-webpack.appspot.com/o/service_2.jpg?alt=media&token=e8d4a219-d3b1-4ead-afe3-3287b21b81df",
-//     ],
-//     name: "cable detection",
-//     process: [
-//       {
-//         icon: "bi bi-chat-left-fill",
-//         title: "Quotation",
-//       },
-//     ],
-//     desc: "<p><strong>Underground cables and pipes are</strong>&nbsp;one of the things that enables telecommunication, power transmission, as well as an undisrupted flow of clean water supplies to every household and commercial building.</p><p><strong>Cable Detection</strong>&nbsp;is conducted by a Licensed Cable Detection Worker (LCDW) with a set of instrument or locator to detect the presence and approximate location of an underground cable or pipe. This serves as an indicator that the cable or pipe is located nearby on site, and to proceed with care and caution.</p>",
-//     short_desc:
-//       "We are honored to have the opportunity to work with various partners and clients across different sectors and all walks of life. We are always open to new partnerships and provide our expertise to support your firm to achieve greater heights.",
-//   },
-//   section_partner: {
-//     short_desc:
-//       "We are honored to have the opportunity to work with various partners and clients across different sectors and all walks of life. We are always open to new partnerships and provide our expertise to support your firm to achieve greater heights.",
-//     partners: [
-//       {
-//         title: "Shewar",
-//         desc: "2222",
-//         image_url:
-//           "http://localhost:9199/v0/b/jupitor2-webpack.appspot.com/o/partner_0..png?alt=media&token=3b41abe5-210e-47a8-903a-3274a8f6fc6e",
-//       },
-//     ],
-//   },
-//   section_quotation: {
-//     desc: "We are honored to have the opportunity to work with various partners and clients across different sectors and all walks of life. We are always open to new partnerships and provide our expertise to support your firm to achieve greater heights.",
-//   },
-//   section_footer: {
-//     desc: "support your firm to achieve greater heights.",
-//   },
-//   contact: {
-//     email: {
-//       icon: "bi bi-envelope-fill",
-//       value: {
-//         icon: "bi bi-send",
-//         data: "cabledetection@gmail.com",
-//       },
-//       desc: "support your firm to achieve greater heights.",
-//       title: "Email us",
-//     },
-//     phone: {
-//       icon: "bi bi-headset",
-//       title: "Call us",
-//       desc: "support your firm to achieve greater heights.",
-//       values: [
-//         {
-//           icon: "bi bi-phone",
-//           data: "09795957915",
-//         },
-//         {
-//           icon: "bi bi-telephone",
-//           data: "09423725185",
-//         },
-//       ],
-//     },
-//     social: {
-//       title: "Socials",
-//       icon: "bi bi-globe",
-//       desc: "support your firm to achieve greater heights.",
-//       values: [
-//         {
-//           data: "www.facebook.com",
-//           icon: "bi bi-facebook",
-//         },
-//       ],
-//     },
-//     address: "address",
-//     official: "John",
-//     nickname: "Alex",
-//     auther: "Kyaw Thu Myint",
-//     company: "Cable Detection",
-//   },
-// };
 
 window.onload = async () => {
   runHeaderControl();
   writeCopywrite();
 
-  $('body').addClass('wait')
+  
   const page = await downloadPage();
-  $('body').removeClass('wait')
 
 
   prepareHero(page?.section_hero, page?.contact);
@@ -151,7 +32,11 @@ window.onload = async () => {
   prepreQuotation(page?.section_quotation, page?.contact);
   prepareFooter(page?.section_footer, page?.contact);
   runAos();
-  $("#quote-form").on("submit", quote);
+  $("#quote-form").on("submit", quote);  
+
+  // Remove loading splash
+  $('body').removeClass('wait')
+
 };
 
 async function downloadPage() {
@@ -163,32 +48,6 @@ async function downloadPage() {
   });
   return data;
 }
-
-// function runMasonry() {
-//   /** Masonry */
-//   // const gridRef = document.querySelector(".grid");
-//   // const moasonry = new Masonry(gridRef, {
-//   //   itemSelector: ".grid-item",
-//   //   percentPosition: true,
-//   //   columnWidth: '.grid-sizer',
-//   //   gutter: 10,
-//   //   stagger: 30,
-//   //   originLeft:false
-//   // });
-//   // imagesLoaded(gridRef).on("progress", function () {
-//   //   moasonry.layout();
-//   // });
-// }
-
-// function runScrollax() {
-//   const parallax = new Scrollax();
-//   parallax.options = {
-//     horizontal: false, // Enable for horizontal scrolling.
-//     offset: 0, // Target area offset from start (top in vert., left in hor.).
-//   };
-//   // Initialize Scrollax instance
-//   parallax.init();
-// }
 
 function runAos() {
   return Aos.init();
@@ -261,7 +120,7 @@ function createPartners(partner) {
   for (let data of partner.partners) {
     const col = $.parseHTML(
       `<div class="col">
-        <div class="card card-body card-hover h-100 border-0 bg-primary bg-opacity-10" data-aos="zoom-in">
+        <div class="card card-body card-hover h-100 border-0 " data-aos="zoom-in">
           <img class="d-block mb-3" src="${data.image_url}" alt="${data.title}">
           <h6 class="fw-bold">${data.title}</h6>
           <p class="fs-sm mb-0">${data.desc}</p>
@@ -340,9 +199,7 @@ function prepreQuotation(quote, contact) {
 
   contact.phone.values.forEach((phone, index) => {
     const phoneHtml =
-      $.parseHTML(`<span class="d-flex gap-2 text-primary p-2 bg-${
-        index == 0 ? "primary" : "secondary"
-      } bg-opacity-10  rounded-3">
+      $.parseHTML(`<span class="d-flex gap-2 text-primary">
       <i class="${phone.icon}"></i>
       <a href="tel:${phone.data}" class="text-decoration-none">${phone.data}</a>
     </span>`);
@@ -354,7 +211,7 @@ function prepreQuotation(quote, contact) {
   for (let svalue of contact.social.values) {
     $("#quotation #quotation-socials").append(
       $.parseHTML(
-        `<a class="${svalue.icon} text-muted text-decoration-none p-2 bg-white rounded-3" href="${svalue.data}"></a>`
+        `<a class="${svalue.icon} text-muted text-decoration-none p-2 bg-light rounded-3" href="${svalue.data}"></a>`
       )
     );
   }
