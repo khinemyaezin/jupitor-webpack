@@ -40,6 +40,7 @@ export function runHeaderControl() {
     }
   });
 }
+
 /**
  *
  * @param { Date } jsdate
@@ -47,7 +48,7 @@ export function runHeaderControl() {
  */
 export function formatDate(jsdate) {
   const aMoment = moment(jsdate);
-  return aMoment.format("DD / MM / YYYY");
+  return aMoment.format("DD/MM/YYYY");
 }
 
 /**
@@ -84,7 +85,30 @@ export function readFile(f) {
     reader.readAsDataURL(f);
   });
 }
-
+/**
+ *
+ * @param { number } _size
+ * @returns {string}
+ */
+export function getFileSize(_size) {
+  var fSExt = new Array("Bytes", "KB", "MB", "GB"),
+    i = 0;
+  while (_size > 900) {
+    _size /= 1024;
+    i++;
+  }
+  return Math.round(_size * 100) / 100 + " " + fSExt[i];
+}
+/**
+ *
+ * @param { File } file
+ * @returns string
+ */
+export function getFileNameWithExt(file) {
+  const name = file.name;
+  const lastDot = name.lastIndexOf(".");
+  return name.substring(lastDot + 1);
+}
 /**
  *
  * @param {string} base64
@@ -108,7 +132,7 @@ export function prepareMedia(storageQuery, source, name) {
   if (source.startsWith("http")) {
     return new Promise((res, rej) => res(source));
   } else {
-    return storageQuery.uploadFile(
+    return storageQuery.uploadBase64(
       source,
       `${name}${getBase64FileType(source)}`
     );
@@ -186,4 +210,31 @@ export function loadingEl() {
       dialogEl.close();
     },
   };
+}
+
+export function copyright() {
+  console.log(`
+
+
+
+  
+𝗖𝗔𝗕𝗟𝗘𝗗𝗘𝗧𝗘𝗖𝗧𝗜𝗢𝗡 by
+
+█▀▀ █▀█ █▀█ █░░ █▀ ▀█▀ █░█ █▀▀ █▀▀
+█▄▄ █▄█ █▄█ █▄▄ ▄█ ░█░ █▄█ █▀░ █▀░
+
+Copyright @ ${new Date().getFullYear()} coolstuff. All right reserved.
+
+
+
+
+`);
+}
+
+export function isEmptyOrSpaces(str) {
+  return str === null || str === undefined || str.match(/^ *$/) !== null;
+}
+
+export function capitalizeName(name) {
+  return name.replace(/\b(\w)/g, s => s.toUpperCase());
 }

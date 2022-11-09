@@ -3,7 +3,7 @@ $font-family-base: "Inter", sans-serif;
 $font-pt: "PT Serif", serif;
 $white: #ffffff;
 $enable-gradients: false;
-$primary: #fa7b03;
+$primary: #ff7b00;
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap");
 //@import "~bootstrap/scss/functions";
 //@import "~bootstrap/scss/variables";
@@ -99,6 +99,8 @@ img {
   height: 45px;
   width: 45px;
 }
+
+//background
 .bg-box {
   .box {
     content: "";
@@ -177,6 +179,8 @@ img {
   bottom: 0;
   left: 0;
 }
+
+//buttons
 /*.btn.btn-primary {
   border: var(--#{$prefix}btn-border-width) solid $black;
   cursor: pointer;
@@ -562,7 +566,7 @@ dialog.loading-dialog {
     stroke-width: 6;
   }
 }
-
+// Bootstrap overwrite
 .card {
   border: none;
   box-sizing: border-box;
@@ -579,7 +583,6 @@ dialog.loading-dialog {
   border: none !important;
   box-shadow: $box-shadow;
 }
-//loader
 
 /*===== type write================================*/
 .blinker {

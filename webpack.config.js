@@ -15,7 +15,7 @@ module.exports = {
     test: "./src/test/test.js",
     homeEditor: "./src/home-editor/home-editor.js",
   },
-  //devtool: "inline-source-map",
+  devtool: "inline-source-map",
   devServer: {
     static: "./dist",
   },

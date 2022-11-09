@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quotations</title>
+    <title>Requests</title>
 </head>
 
 <body>
@@ -32,8 +32,8 @@
                     <li class="nav-item"><a href="home-editor.html" class="nav-link"><span>Page editor</span></a></li>
 
                     <li class="nav-item dropdown ">
-                        <div class="icontext me-4 dropdown-toggle" style="max-width: 210px; margin-bottom: 2px;" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="icontext me-4 dropdown-toggle" style="max-width: 210px; margin-bottom: 2px;"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle nav-link p-0"></i>
                             <div class="text nav-link p-0" id="nav-user-email"> Hi, Username </div>
                         </div>
@@ -54,15 +54,15 @@
         <section class="quotations pb-5">
             <div class="container">
 
-                <div class="d-flex justify-content-between">
-                    <h3 class="fw-bold">QUOTATIONS</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="fw-bold mb-0">CUSTOMER REQUESTS</h3>
                     <div class="dropdown">
-                        <button class="btn btn-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" aria-expanded="false" id="filter-dropdown-btn">
                             <span class="spinner-grow spinner-grow-sm d-none" role="status" aria-hidden="true"
                                 id="filter-spinner"></span>
+                                <i class="fw-bold bi bi-search"></i>
 
-                            Filter
                         </button>
                         <div class="dropdown-menu dropdown-menu-end" style="min-width: 20rem;">
                             <form class="p-4" id="filter-box-form">
@@ -86,15 +86,14 @@
                                     <label for="filter-date-picker" class="form-label">Date</label>
 
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="filter-date-picker" readonly placeholder="Choose date range"
-                                            data-field="timestamp">
+                                        <input type="text" class="form-control" id="filter-date-picker" readonly
+                                            placeholder="Choose date range" data-field="timestamp">
                                     </div>
                                 </div>
                                 <div class="d-flex gap-3">
                                     <button type="button" class="btn btn-light" id="filter-reset-btn"
                                         query-disabled-btn>Reset</button>
-                                    <button type="submit" class="btn btn-primary"
-                                        query-disabled-btn>Search</button>
+                                    <button type="submit" class="btn btn-primary" query-disabled-btn>Search</button>
                                 </div>
 
                             </form>
@@ -103,15 +102,22 @@
                 </div>
                 <hr>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table align-middle">
                         <thead class=" table-light">
                             <tr>
-                                <td>#</td>
-                                <td>Name</td>
-                                <td>Email</td>
-                                <td>Message</td>
-                                <td>Requested at</td>
-                                <td>Resolved?</td>
+                                <th>#</th>
+                                <th><i class="bi bi-person"></i>
+                                </th>
+                                <th><i class="bi bi-envelope"></i>
+                                </th>
+                                <th><i class="bi bi-chat-left"></i>
+                                </th>
+                                <th><i class="bi bi-clock-history"></i>
+                                </th>
+                                <th><i class="bi bi-check2-square"></i>
+                                </th>
+                                <th><i class="bi bi-paperclip"></i>
+                                </th>
                             </tr>
                         </thead>
                         <tbody id="quote-tbody">

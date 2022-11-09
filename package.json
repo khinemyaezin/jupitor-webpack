@@ -1,6 +1,6 @@
 {
   "name": "cable-detection",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -58,6 +58,7 @@
     "rxjs": "^7.5.7",
     "scrollax": "^1.0.0",
     "snapsvg": "^0.5.1",
-    "snapsvg-cjs": "0.0.6"
+    "snapsvg-cjs": "0.0.6",
+    "uuid": "^9.0.0"
   }
 }

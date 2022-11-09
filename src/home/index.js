@@ -2,8 +2,15 @@ import "../home/index.scss";
 import "jquery";
 import { jarallax } from "jarallax";
 import Aos from "aos";
-import { runHeaderControl } from "../utility/main";
+import {
+  runHeaderControl,
+  copyright,
+  dialog,
+  getFileSize,
+  getFileNameWithExt,
+} from "../utility/main";
 import { FirebaseInit } from "../utility/firebase";
+import { v4 as uuidv4 } from "uuid";
 
 import "bootstrap/js/dist/offcanvas";
 import "bootstrap/js/dist/collapse";
@@ -12,17 +19,28 @@ import "bootstrap/js/dist/carousel";
 
 import { Quote } from "../utility/model-quote";
 import TxtType from "../utility/text-writer";
+import StorageQuery from "../utility/storage-query";
 
 require.context("../assets", false, /\.(png|jpe?g)$/i);
 const firebase = new FirebaseInit();
+
+//copy right
+copyright();
 
 window.onload = async () => {
   runHeaderControl();
   writeCopywrite();
 
-  
   const page = await downloadPage();
-
+  if (typeof page === "string" || Object.keys(page).length == 0) {
+    dialog(
+      "Sorry",
+      "Our site is not avaliable in your region",
+      () => {},
+      []
+    ).showModal();
+    return;
+  }
 
   prepareHero(page?.section_hero, page?.contact);
   prepareAbout(page?.section_about);
@@ -32,38 +50,62 @@ window.onload = async () => {
   prepreQuotation(page?.section_quotation, page?.contact);
   prepareFooter(page?.section_footer, page?.contact);
   runAos();
-  $("#quote-form").on("submit", quote);  
+  $("#quote-form").on("submit", quote);
 
   // Remove loading splash
-  $('body').removeClass('wait')
-
+  $("body").removeClass("wait");
 };
 
 async function downloadPage() {
   let data = {};
-  await firebase.onFirstData("page", []).then((snapshot) => {
-    snapshot.docs.forEach((doc, i) => {
-      data[doc.id] = doc.data();
+  await firebase
+    .onFirstData("page", [])
+    .then((snapshot) => {
+      snapshot.docs.forEach((doc, i) => {
+        data[doc.id] = doc.data();
+      });
+    })
+    .catch((error) => {
+      return "Our site is not avaliable in your region!";
     });
-  });
   return data;
 }
 
 function runAos() {
-  return Aos.init();
+  return Aos.init({ once: true });
 }
 
 function writeCopywrite() {
   $("#footer-fullyear").html(new Date().getFullYear());
 }
 
-function quote(event) {
+async function quote(event) {
   event.preventDefault();
 
-  const username = $("#quote-form input[name=name]").val();
-  const email = $("#quote-form input[name=email]").val();
+  const email = $("#quote-form input[name=email]").val().toLowerCase();
+  const username = $("#quote-form input[name=name]").val().toLowerCase();
   const message = $("#quote-form input[name=message]").val();
+  let attachment = "";
 
+  // Upload attachment file before submit;
+  if ($("#ref-chooser").val() == "file" && $("#ref-file")[0].files[0]) {
+    const storageQuery = new StorageQuery(firebase);
+    const file = $("#ref-file")[0].files[0];
+    const fileName = `attachments/${uuidv4()}.${getFileNameWithExt(file)}`;
+    const downloadURL = await storageQuery
+      .uploadFile(file, fileName)
+      .catch(() => {
+        return null;
+      });
+
+    if (downloadURL) {
+      attachment = downloadURL;
+    }
+  } else {
+    attachment = $("#ref-url").val();
+  }
+
+  // Progress 
   let query = (operation) => {
     if (operation) {
       $("#quote-form button[type=submit]").addClass("query");
@@ -74,12 +116,14 @@ function quote(event) {
   };
   query(true);
 
-  const quote = new Quote(username, email, message, false);
+  // Upload quotation request;
+  const quote = new Quote(username, email, message, false, attachment);
   firebase
     .setDocument("quote", quote.convert)
     .then(() => {
       alert("successfully submit");
       document.getElementById("quote-form").reset();
+      $("#ref-chooser").trigger('change');
       query(false);
     })
     .catch((error) => {
@@ -119,8 +163,8 @@ function createPartners(partner) {
 
   for (let data of partner.partners) {
     const col = $.parseHTML(
-      `<div class="col">
-        <div class="card card-body card-hover h-100 border-0 " data-aos="zoom-in">
+      `<div class="col" >
+        <div class="card card-body card-hover h-100 border-0" data-aos="zoom-in">
           <img class="d-block mb-3" src="${data.image_url}" alt="${data.title}">
           <h6 class="fw-bold">${data.title}</h6>
           <p class="fs-sm mb-0">${data.desc}</p>
@@ -198,8 +242,7 @@ function prepreQuotation(quote, contact) {
   $("#quotation #quotation-phone-desc").html(contact.phone.desc);
 
   contact.phone.values.forEach((phone, index) => {
-    const phoneHtml =
-      $.parseHTML(`<span class="d-flex gap-2 text-primary">
+    const phoneHtml = $.parseHTML(`<span class="d-flex gap-2 text-primary">
       <i class="${phone.icon}"></i>
       <a href="tel:${phone.data}" class="text-decoration-none">${phone.data}</a>
     </span>`);
@@ -215,6 +258,41 @@ function prepreQuotation(quote, contact) {
       )
     );
   }
+
+  //Entry
+  document.getElementById("ref-file").addEventListener("change", function () {
+    var _size = this.files[0].size;
+    if (_size >= 2000000) {
+      // 2MB in bytes
+      dialog(
+        "Over limit",
+        "Your selected file excceds 2MB. Please choose another one.",
+        () => {},
+        [{ title: "OK", value: "go&check", priority: "primary" }]
+      ).showModal();
+      $("#ref-file").val("");
+      $("#ref-file-btn").html("No file (max 2MB)");
+    }
+
+    const sizeString = getFileSize(_size);
+
+    $("#ref-file-btn").html(
+      `${this.files[0].name}  <span class="position-absolute file-size-bage end-0 text-muted">${sizeString}</span> `
+    );
+  });
+
+  $("#ref-chooser").on("change", function () {
+    $("#ref-file").val("");
+    $("#ref-file-btn").text("No file selected (max 2MB)");
+    $("#ref-url").val("");
+    if ($("#ref-chooser").val() == "url") {
+      $("#ref-file-btn").hide();
+      $("#ref-url").show();
+    } else {
+      $("#ref-file-btn").show();
+      $("#ref-url").hide();
+    }
+  });
 }
 
 function prepareFooter(footer, contact) {

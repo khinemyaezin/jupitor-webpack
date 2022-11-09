@@ -42,15 +42,19 @@ export class FirebaseInit {
   #currentUser = null;
 
   constructor() {
-    this.#app = initializeApp(this.firebaseConfig);
-    this.#auth = getAuth(this.#app);
-    this.#db = getFirestore(this.#app);
-    this.#storage = getStorage(this.#app);
+    try {
+      this.#app = initializeApp(this.firebaseConfig);
+      this.#auth = getAuth(this.#app);
+      this.#db = getFirestore(this.#app);
+      this.#storage = getStorage(this.#app);
 
-    if (location.hostname === "localhost") {
-      connectAuthEmulator(this.#auth, "http://localhost:9099");
-      connectFirestoreEmulator(this.#db, "localhost", 8080);
-      connectStorageEmulator(this.#storage, "localhost", 9199);
+      if (location.hostname === "localhost") {
+        connectAuthEmulator(this.#auth, "http://localhost:9099");
+        connectFirestoreEmulator(this.#db, "localhost", 8080);
+        connectStorageEmulator(this.#storage, "localhost", 9199);
+      }
+    } catch (e) {
+      console.log('error on firebase init');
     }
   }
 
@@ -137,7 +141,7 @@ export class FirebaseInit {
     return updateDoc(docRef, updateObj);
   }
 
-  async setDocument(collectionName,value) {
+  async setDocument(collectionName, value) {
     const ref = collection(this.#db, collectionName);
     return setDoc(doc(ref), value);
   }

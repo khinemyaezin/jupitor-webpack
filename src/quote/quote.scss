@@ -26,10 +26,19 @@ main {
     max-width: 5rem;
   }
 }
+#filter-dropdown-btn::after {
+  display: none;
+}
 .progress {
   height: 0.2rem;
 }
 .table {
+  thead th:last-child {
+    text-align: center;
+  }
+  tr {
+    transition: all 0.2s;
+  }
   @include media-breakpoint-down(sm) {
     thead {
       display: none;
@@ -41,51 +50,65 @@ main {
     }
     tr {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(3, 0.1fr);
-
+      grid-template-columns: 20px 1fr 1fr 1fr;
+      grid-template-rows: repeat(4, 0.1fr);
     }
-    tr:not(:last-child){
+    tr:not(:last-child) {
       border-bottom: 1px solid $gray-300;
     }
     td {
       border: none;
     }
     td.td-no {
-      display: none;
-    }
-    td.td-email {
       grid-column-start: 1;
-      grid-column-end: 3;
+      grid-column-end: 2;
       grid-row-start: 1;
       grid-row-end: 2;
-
-      font-weight: bold;
     }
-    td.td-username {
-      grid-column-start: 1;
-      grid-column-end: 4;
+    td.td-email {
+      grid-column-start: 2;
+      grid-column-end: 5;
       grid-row-start: 2;
       grid-row-end: 3;
+
+      //font-weight: bold;
+    }
+    td.td-username {
+      grid-column-start: 2;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      font-weight: bold;
     }
     td.td-timestamp {
-      grid-column-start: 3;
+      grid-column-start: 4;
       grid-column-end: 5;
       grid-row-start: 1;
       grid-row-end: 2;
       text-align: end;
     }
     td.td-message {
-      grid-column-start: 1;
+      grid-column-start: 2;
       grid-column-end: 5;
       grid-row-start: 3;
       grid-row-end: 4;
     }
-    td.td-resolve {
+    td.td-attachment {
       grid-column-start: 4;
       grid-column-end: 5;
-      grid-row-start: 2;
-      grid-row-end: 3;
+      grid-row-start: 4;
+      grid-row-end: 5;
+    }
+    td.td-resolve {
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row-start: 4;
+      grid-row-end: 5;
+
+      display: grid;
+      .form-check {
+        margin: auto;
+      }
     }
   }
 }
