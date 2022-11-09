@@ -1,0 +1,137 @@
+@import "../home/index.scss";
+@import "../quill.css";
+/*===== DROP ZONE =====*/
+.dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.dz-message {
+  display: grid;
+  padding: 5rem 1rem;
+  background-color: #fff;
+  border: 1px dashed #c6d3e6;
+  border-radius: 0.375rem;
+  text-align: center;
+  color: #869ab8;
+  transition: all 0.2s ease-in-out;
+  order: -1;
+  cursor: pointer;
+  z-index: 1;
+}
+.dz-message:hover {
+  border-color: #869ab8;
+  color: #161c2d;
+}
+.dz-button {
+  background: none;
+  border: 0;
+  font-size: inherit;
+  color: inherit;
+  margin: auto;
+}
+.dz-drag-hover .dz-message {
+  border-color: #335eea;
+  color: #335eea;
+}
+.dropzone-multiple .dz-message {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.dropzone-single.dz-max-files-reached .dz-message {
+  background-color: rgba(22, 28, 45, 0.9);
+  color: white;
+  opacity: 0;
+}
+.dropzone-single.dz-max-files-reached .dz-message:hover {
+  opacity: 1;
+}
+.dz-preview-single {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 0.375rem;
+}
+.dz-preview-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 0.375rem;
+}
+.dz-preview-img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.375rem;
+}
+.dz-preview-multiple .list-group-item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+//Hero
+#hero-landing {
+  #hero-carrier.form-control-lg {
+    font-size: $h1-font-size !important;
+  }
+  #hero-name {
+    font-size: $h2-font-size;
+  }
+}
+
+#services {
+  .form-control {
+    font-size: inherit !important;
+  }
+  .form-control-lg {
+    font-size: inherit !important;
+  }
+  #service-name {
+    font-size: $h3-font-size !important;
+    width: 280px;
+  }
+  #service-carousel-inner {
+    min-height: 20rem;
+  }
+  .btn-process-close{
+    right: 10px;
+    top: 10px;
+  }
+  
+}
+#quotation {
+  #quotation-email-title,#quotation-phone-title,#quotation-social-title {
+    font-size: $h5-font-size;
+  }
+}
+#partner{
+  .btn-partner-close {
+    right: 10px;
+    top: 10px;
+  }
+}
+#gallery{
+  .btn-gallery-close{
+    right: 10px;
+    top: 10px;
+  }
+}
+#about{
+  .btn-about-value-close{
+    top: 10px;
+    right: 10px;
+  }
+}
+form.entry{
+  width: 300px;
+  padding: 2rem 0 2rem 0;
+  @include media-breakpoint-down(sm){
+    width: 100%;
+  
+  }
+}

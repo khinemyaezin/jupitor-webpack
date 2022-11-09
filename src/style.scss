@@ -3,16 +3,68 @@ $font-family-base: "Inter", sans-serif;
 $font-pt: "PT Serif", serif;
 $white: #ffffff;
 $enable-gradients: false;
-$primary: #fa7b03;
+$primary: #ff7b00;
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap");
+//@import "~bootstrap/scss/functions";
+//@import "~bootstrap/scss/variables";
+//@import "~bootstrap/scss/maps";
+//@import "~bootstrap/scss/mixins";
+//@import "~bootstrap/scss/utilities";
+//@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/mixins/banner";
+@include bsBanner("");
+
+// scss-docs-start import-stack
+// Configuration
 @import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@import "./variables";
 @import "~bootstrap/scss/maps";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
-@import "~bootstrap/scss/bootstrap";
+
+// Layout & components
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+//@import "button-group";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+//@import "accordion";
+//@import "breadcrumb";
+//@import "pagination";
+//@import "badge";
+//@import "alert";
+@import "~bootstrap/scss/progress";
+//@import "list-group";
+@import "~bootstrap/scss/close";
+//@import "toasts";
+//@import "modal";
+//@import "tooltip";
+//@import "popover";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/offcanvas";
+@import "~bootstrap/scss/placeholders";
+
+// Helpers
+@import "~bootstrap/scss/helpers";
+
+// Utilities
+@import "~bootstrap/scss/utilities/api";
+// scss-docs-end import-stack
+
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import "~aos/dist/aos.css";
+@import "./loaders.scss";
 
 :root {
   --header-outer-height: 100px;
@@ -47,6 +99,8 @@ img {
   height: 45px;
   width: 45px;
 }
+
+//background
 .bg-box {
   .box {
     content: "";
@@ -125,6 +179,8 @@ img {
   bottom: 0;
   left: 0;
 }
+
+//buttons
 /*.btn.btn-primary {
   border: var(--#{$prefix}btn-border-width) solid $black;
   cursor: pointer;
@@ -177,7 +233,6 @@ img {
   }
 }
 
-/* CSS */
 .overlap-shade {
   background-color: transparent;
   border: 1px solid $primary;
@@ -229,6 +284,20 @@ img {
   }
 }
 
+// Dialog
+dialog {
+  width: 300px;
+  background-color: $card-bg;
+  background-clip: border-box;
+  border: $card-border-width solid $card-border-color;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.515);
+}
+dialog.loading-dialog {
+  background-color: $card-bg;
+}
+
 /*===== NAV BAR =====*/
 .navbar {
   background: transparent !important;
@@ -255,7 +324,7 @@ img {
     display: flex !important;
     display: -webkit-flex !important;
     justify-content: space-between !important;
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
       flex-direction: row;
     }
   }
@@ -267,7 +336,7 @@ img {
     &:focus {
       color: $white !important;
     }
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       color: $white;
     }
   }
@@ -352,13 +421,16 @@ img {
         }
       }
 
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down(sm) {
         &.active {
           > a {
             color: $primary;
           }
         }
         text-align: center;
+        .dropdown-toggle::after {
+          color: $white !important;
+        }
       }
     }
   }
@@ -394,9 +466,12 @@ img {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     padding: 0 15px;
     .nav-item {
+      .dropdown-toggle::after {
+        color: $white !important;
+      }
       .nav-link {
         color: $white !important;
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(sm) {
           padding-left: 0 !important;
           padding-right: 0 !important;
           padding-bottom: 20px !important;
@@ -408,9 +483,8 @@ img {
         }
       }
     }
-
-    .navbar-nav {
-      @include media-breakpoint-down(md) {
+    .nav-item.dropdown .navbar-nav {
+      @include media-breakpoint-down(sm) {
         background: none;
         border-radius: 0px;
         padding-left: 0 !important;
@@ -492,7 +566,7 @@ img {
     stroke-width: 6;
   }
 }
-
+// Bootstrap overwrite
 .card {
   border: none;
   box-sizing: border-box;

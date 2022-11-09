@@ -12,9 +12,10 @@ module.exports = {
     signup: "./src/auth/signup.js",
     login: "./src/auth/login.js",
     quote: "./src/quote/quote.js",
+    test: "./src/test/test.js",
+    homeEditor: "./src/home-editor/home-editor.js",
   },
-
-  //devtool: "inline-source-map",
+  devtool: "inline-source-map",
   devServer: {
     static: "./dist",
   },
@@ -45,7 +46,6 @@ module.exports = {
       filename: "login.html",
       template: "src/auth/login.html",
       favicon: "src/assets/favicon.ico",
-
       scriptLoading: "module",
       chunks: ["login"],
     }),
@@ -57,6 +57,22 @@ module.exports = {
 
       scriptLoading: "module",
       chunks: ["quote"],
+    }),
+    new HtmlWebpackPlugin({
+      title: "Test",
+      filename: "test.html",
+      template: "src/test/test.html",
+      scriptLoading: "module",
+      chunks: ["test"],
+    }),
+    new HtmlWebpackPlugin({
+      title: "HomeEditor",
+      filename: "home-editor.html",
+      template: "src/home-editor/home-editor.html",
+      favicon: "src/assets/favicon.ico",
+
+      scriptLoading: "module",
+      chunks: ["homeEditor"],
     }),
   ].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
   module: {

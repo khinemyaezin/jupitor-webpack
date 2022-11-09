@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  connectAuthEmulator,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -17,13 +18,9 @@ import {
   startAfter,
   endBefore,
   limitToLast,
+  connectFirestoreEmulator,
 } from "firebase/firestore";
-// const {
-//   initializeAppCheck,
-//   ReCaptchaV3Provider,
-// } = require("firebase/app-check");
-
-import { Quote } from "./model-quote";
+import { getStorage, connectStorageEmulator } from "firebase/storage";
 
 const pageSize = 10;
 
@@ -40,21 +37,25 @@ export class FirebaseInit {
   };
   #app = null;
   #auth = null;
-  #appcheck = null;
+  #storage = null;
   #db = null;
   #currentUser = null;
 
   constructor() {
-    this.#app = initializeApp(this.firebaseConfig);
-    this.#auth = getAuth(this.#app);
-    this.#db = getFirestore(this.#app);
+    try {
+      this.#app = initializeApp(this.firebaseConfig);
+      this.#auth = getAuth(this.#app);
+      this.#db = getFirestore(this.#app);
+      this.#storage = getStorage(this.#app);
 
-    // this.#appcheck = initializeAppCheck(this.#app, {
-    //   provider: new ReCaptchaV3Provider(
-    //     "6Lczxb0iAAAAALnYCEJFEj6vNq2EViFO7ZBdCebo"
-    //   ),
-    //   isTokenAutoRefreshEnabled: true,
-    // });
+      if (location.hostname === "localhost") {
+        connectAuthEmulator(this.#auth, "http://localhost:9099");
+        connectFirestoreEmulator(this.#db, "localhost", 8080);
+        connectStorageEmulator(this.#storage, "localhost", 9199);
+      }
+    } catch (e) {
+      console.log('error on firebase init');
+    }
   }
 
   get getCurrentuser() {
@@ -62,6 +63,10 @@ export class FirebaseInit {
   }
   get getDb() {
     return this.#db;
+  }
+
+  get getStorage() {
+    return this.#storage;
   }
 
   get operators() {
@@ -136,13 +141,9 @@ export class FirebaseInit {
     return updateDoc(docRef, updateObj);
   }
 
-  async setDocument(value) {
-    if (!value instanceof Quote) {
-      throw new Error("value must be quote object");
-    }
-    const quoteRef = collection(this.#db, "quote");
-
-    return setDoc(doc(quoteRef), value.convert);
+  async setDocument(collectionName, value) {
+    const ref = collection(this.#db, collectionName);
+    return setDoc(doc(ref), value);
   }
 
   async watchUser(callback) {

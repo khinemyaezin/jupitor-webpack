@@ -6,11 +6,13 @@ import {
   formatDate,
   getEndOfDay,
   getStartOfDay,
+  isEmptyOrSpaces,
+  capitalizeName,
 } from "../utility/main";
 import { FirebaseInit } from "../utility/firebase";
 import QuoteService from "../utility/quote-query";
 import "bootstrap/js/dist/collapse";
-import 'bootstrap/js/dist/offcanvas';
+import "bootstrap/js/dist/offcanvas";
 import Dropdown from "bootstrap/js/dist/dropdown";
 import { easepick, RangePlugin, TimePlugin } from "@easepick/bundle";
 
@@ -33,14 +35,14 @@ window.onload = async () => {
       datePicker();
       importOperators();
       prepareFilterDropdown();
-      prepareSearch();
+      search();
       preparePrevSearch();
       prepareNextSearch();
       prepareReset();
 
-      //queryState(true);
-      //quoteService.onFirstData([]).then(renderQuote);
-      prepareDemo();
+      queryState(true);
+      quoteService.onFirstData([]).then(renderQuote);
+      //prepareDemo();
     }
   });
 };
@@ -53,7 +55,10 @@ function renderQuote(snapshot) {
   if (snapshot) {
     const rowCount = $("#quote-tbody tr").length;
     snapshot.docs.forEach((doc, i) => {
-      const row = prepareRow(setQuoteFromQuery(doc.id, doc.data()), (rowCount+i+1));
+      const row = prepareRow(
+        setQuoteFromQuery(doc.id, doc.data()),
+        rowCount + i + 1
+      );
       $("#quote-tbody").append(row);
     });
   } else {
@@ -64,7 +69,13 @@ function renderQuote(snapshot) {
 }
 
 function setQuoteFromQuery(id, doc) {
-  let quote = new Quote(doc.username, doc.email, doc.message, doc.resolve);
+  let quote = new Quote(
+    doc.username,
+    doc.email,
+    doc.message,
+    doc.resolve,
+    doc?.attachment
+  );
   quote.docId = id;
   quote.timestamp = doc.timestamp;
   return quote;
@@ -87,7 +98,7 @@ function prepareRow(quote, rowCount) {
   const no = $.parseHTML(`<td class="td-no">${rowCount}</td>`);
   $(no).appendTo(row);
 
-  const name = $.parseHTML(`<td class="td-username">${quote.username}</td>`);
+  const name = $.parseHTML(`<td class="td-username">${capitalizeName(quote.username)}</td>`);
   $(name).appendTo(row);
 
   const email = $.parseHTML(`<td class="td-email">${quote.email}</td>`);
@@ -96,17 +107,20 @@ function prepareRow(quote, rowCount) {
   const message = $.parseHTML(`<td class="td-message">${quote.message}</td>`);
   $(message).appendTo(row);
 
-  const date = $.parseHTML(`<td class="td-timestamp">${formatDate(quote.timestamp.toDate())}</td>`);
+  const date = $.parseHTML(
+    `<td class="td-timestamp">${formatDate(quote.timestamp.toDate())}</td>`
+  );
   $(date).appendTo(row);
+
   const resolve = $.parseHTML(
     `<td class="td-resolve">
       <div class="form-check">
           <input class="form-check-input" type="checkbox" id="resolve-${
             quote.docId
           }" ${quote.resolve ? "checked" : ""} query-disabled-btn>
-          <label class="d-block d-md-none" for="resolve-${
+          <label class="d-block" for="resolve-${
             quote.docId
-          }">Resolve</label>
+          }">Completed</label>
       </div>
     </td>`
   );
@@ -116,6 +130,17 @@ function prepareRow(quote, rowCount) {
       updateResolve(quote.docId, this.checked);
     });
   $(resolve).appendTo(row);
+
+  const attachment = $.parseHTML(`<td class="td-attachment text-center">
+  ${
+    isEmptyOrSpaces(quote.attachment)
+      ? `-`
+      : `<a type="button" class="btn" href="${quote.attachment}" download><i class="bi bi-download"></i></a>`
+  }
+     
+    </td>`);
+  $(attachment).appendTo(row);
+
   return row;
 }
 
@@ -150,18 +175,18 @@ function datePicker() {
   });
 }
 
-function prepareSearch() {
+function search() {
   $("#filter-box-form").on("submit", (e) => {
     e.preventDefault();
     let filterModel = [
       {
         field: "username",
-        value: $("#filter-name").val(),
+        value: $("#filter-name").val().toLowerCase(),
         operator: $("#filter-name-operator").val(),
       },
       {
         field: "email",
-        value: $("#filter-email").val(),
+        value: $("#filter-email").val().toLowerCase(),
         operator: $("#filter-email-operator").val(),
       },
     ];
@@ -226,7 +251,7 @@ function prepareReset() {
   $("#filter-reset-btn").on("click", () => {
     document.getElementById("filter-box-form").reset();
     queryState(true);
-    $('#quote-tbody').html('')
+    $("#quote-tbody").html("");
     quoteService.onFirstData([]).then(renderQuote);
     filterDropdown.toggle();
   });
@@ -237,31 +262,5 @@ function queryState(operation) {
   else $("#filter-spinner").addClass("d-none");
   $("[query-disabled-btn]").each(function () {
     $(this).prop("disabled", operation);
-  });
-}
-
-function prepareDemo() {
-  [
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-    new Quote("kmz", "kmz@gmail.com", "hello", false),
-  ].forEach((q, i) => {
-    const row = prepareRow(q, i);
-    $("#quote-tbody").append(row);
   });
 }
