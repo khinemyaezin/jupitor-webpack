@@ -1,5 +1,7 @@
 @import "../style.scss";
 
+$image-height:40rem;
+
 section {
   padding: 3rem 0 3rem 0;
   position: relative;
@@ -154,7 +156,7 @@ section {
   .carousel-item {
     height: 50vh;
     @include media-breakpoint-up(md) {
-      height: 60vh;
+      height: $image-height;
     }
     img {
       height: 100%;
@@ -520,7 +522,7 @@ section {
       display: block;
       padding-top: 50vh;
       @include media-breakpoint-up(md) {
-        padding-top: 60vh;
+        padding-top: $image-height;
       }
     }
     img {
