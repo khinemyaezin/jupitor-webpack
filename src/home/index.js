@@ -82,6 +82,17 @@ function writeCopywrite() {
 async function quote(event) {
   event.preventDefault();
 
+  // Progress
+  let query = (operation) => {
+    if (operation) {
+      $("#quote-form button[type=submit]").addClass("query");
+    } else {
+      $("#quote-form button[type=submit]").removeClass("query");
+    }
+    $("#quote-form button[type=submit]").prop("disabled", operation);
+  };
+  query(true);
+
   const email = $("#quote-form input[name=email]").val().toLowerCase();
   const username = $("#quote-form input[name=name]").val().toLowerCase();
   const message = $("#quote-form input[name=message]").val();
@@ -105,17 +116,6 @@ async function quote(event) {
     attachment = $("#ref-url").val();
   }
 
-  // Progress 
-  let query = (operation) => {
-    if (operation) {
-      $("#quote-form button[type=submit]").addClass("query");
-    } else {
-      $("#quote-form button[type=submit]").removeClass("query");
-    }
-    $("#quote-form button[type=submit]").prop("disabled", operation);
-  };
-  query(true);
-
   // Upload quotation request;
   const quote = new Quote(username, email, message, false, attachment);
   firebase
@@ -123,7 +123,7 @@ async function quote(event) {
     .then(() => {
       alert("successfully submit");
       document.getElementById("quote-form").reset();
-      $("#ref-chooser").trigger('change');
+      $("#ref-chooser").trigger("change");
       query(false);
     })
     .catch((error) => {
@@ -148,14 +148,29 @@ function prepareHero(hero, contact) {
 
 function prepareAbout(about) {
   $("#about #about-desc").html(about.description);
-  $("#about #about-project-count").html(about.project.count);
-  $("#about #about-project-title").html(about.project.title);
   $("#about #about-image").attr("src", about.image_url);
+  $("#about #about-project-title").html(about.project.title);
+  $("#about #about-project-count").html(about.project.count);
   for (let value of about.values) {
-    const s = valueHtml(value.title, value.desc);
-    const valueRef = $.parseHTML(s);
-    $("#about-values").append(valueRef);
+    const htmlAboutValuesString = getHTMLAboutValues(value.title, value.desc);
+    const htmlAboutValuesRef = $.parseHTML(htmlAboutValuesString);
+    $("#about-values").append(htmlAboutValuesRef);
   }
+}
+
+function getHTMLAboutValues(title, desc) {
+  return ` <div class="d-flex p-3 gap-3 align-items-center" data-aos="fade-right">
+            <div class="display-2 text-white bg-dark fw-bold m-0 align-self-start p-1 ">${title.substring(
+              0,
+              1
+            )}</div>
+            <div class="flex-grow-1 ps-3">
+              <div class="overflow-hidden">
+                  <h5 class="mb-2 lead fw-bold">${title}</h5>
+              </div>
+              <p>${desc}</p>
+            </div>
+          </div>`;
 }
 
 function createPartners(partner) {
@@ -180,13 +195,17 @@ function prepareServices(service) {
   $("#services #service-short-desc").text(service.short_desc);
   $("#services #service-desc").html(service.desc);
   $("#services #service-name").html(service.name);
+
   service.image_urls.forEach((url, index) => {
-    const slide = $.parseHTML(`<div class="carousel-item ${
-      index == 0 ? "active" : ""
-    }"><img src="${url}" class="d-block w-100" alt="service-${index}"></div>
-      `);
+    const slide = $.parseHTML(
+      `<div class="carousel-item ${index == 0 ? "active" : ""}">
+      <img src="${url}" class="d-block w-100" alt="service-${index}">
+      </div>
+      `
+    );
     $("#services #service-carousel-inner").append(slide);
   });
+
   const delay = 100;
   service.process.forEach((process, index) => {
     const processHtml = $.parseHTML(`
@@ -229,17 +248,16 @@ function prepareGallery(gallery) {
 
 function prepreQuotation(quote, contact) {
   $("#quotation #quotation-short-desc").html(quote.short_desc);
-
-  $("#quotation #quotation-email-title").html(contact.email.title);
   $("#quotation #quotation-email-desc").html(contact.email.desc);
+  $("#quotation #quotation-email-title").html(contact.email.title);
   $("#quotation #quotation-email-value").html(contact.email.value.data);
   $("#quotation #quotation-email-value").attr(
     "href",
     `mailto:${contact.email.value.data}`
   );
 
-  $("#quotation #quotation-phone-title").html(contact.phone.title);
   $("#quotation #quotation-phone-desc").html(contact.phone.desc);
+  $("#quotation #quotation-phone-title").html(contact.phone.title);
 
   contact.phone.values.forEach((phone, index) => {
     const phoneHtml = $.parseHTML(`<span class="d-flex gap-2 text-primary">
@@ -249,8 +267,9 @@ function prepreQuotation(quote, contact) {
     $("#quotation #quotation-phones").append(phoneHtml);
   });
 
-  $("#quotation  #quotation-social-title").html(contact.social.title);
   $("#quotation  #quotation-social-desc").html(contact.social.desc);
+  $("#quotation  #quotation-social-title").html(contact.social.title);
+
   for (let svalue of contact.social.values) {
     $("#quotation #quotation-socials").append(
       $.parseHTML(
@@ -285,6 +304,7 @@ function prepreQuotation(quote, contact) {
     $("#ref-file").val("");
     $("#ref-file-btn").text("No file selected (max 2MB)");
     $("#ref-url").val("");
+
     if ($("#ref-chooser").val() == "url") {
       $("#ref-file-btn").hide();
       $("#ref-url").show();
@@ -305,6 +325,7 @@ function prepareFooter(footer, contact) {
 
   $("footer #footer-company-desc").text(footer.desc);
   $("footer #footer-company-address").text(contact.address);
+
   $("footer #footer-email").text(contact.email.value.data);
   $("footer #footer-email").attr("href", `mailto:${contact.email.value.data}`);
 
@@ -319,20 +340,3 @@ function prepareFooter(footer, contact) {
     );
   }
 }
-
-function valueHtml(title, desc) {
-  return ` <div class="d-flex p-3 gap-3 align-items-center" data-aos="fade-right">
-            <div class="display-2 text-white bg-dark fw-bold m-0 align-self-start p-1 ">${title.substring(
-              0,
-              1
-            )}</div>
-            <div class="flex-grow-1 ps-3">
-              <div class="overflow-hidden">
-                  <h5 class="mb-2 lead fw-bold">${title}</h5>
-              </div>
-              <p>${desc}</p>
-            </div>
-          </div>`;
-}
-
-function init() {}
