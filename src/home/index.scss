@@ -6,10 +6,17 @@ section {
   padding: 3rem 0 3rem 0;
   position: relative;
 }
+section.p-0 .container{
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
 .jarallax {
   position: relative;
   z-index: 0;
   height: 100%;
+  img {
+    height: 100% !important;
+  }
 }
 .form-control {
   background-color: transparent !important;
@@ -627,6 +634,9 @@ section {
     @include media-breakpoint-down(sm) {
       text-align: center;
     }
+  }
+  .address-wrapper .address:not(:last-child) {
+    border-bottom: $border-width $border-color solid;
   }
   .address-icon {
     @include media-breakpoint-down(sm) {

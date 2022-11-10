@@ -1,11 +1,11 @@
 $enable-rounded: false;
 $font-family-base: "Inter", sans-serif;
 $font-pt: "PT Serif", serif;
+$font-caveat: "Caveat", cursive;
 $white: #ffffff;
 $enable-gradients: false;
 $primary: #ff7b00;
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap");
-//@import "~bootstrap/scss/functions";
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@100;200;300;400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"); //@import "~bootstrap/scss/functions";
 //@import "~bootstrap/scss/variables";
 //@import "~bootstrap/scss/maps";
 //@import "~bootstrap/scss/mixins";
@@ -75,10 +75,22 @@ $primary: #ff7b00;
   --header-bg: #fff;
 }
 
-/* Fonts */
+// TOPOGRAPHY
 .font-pt {
   font-family: $font-pt;
 }
+.font-caveat {
+  font-family: $font-caveat;
+}
+.text-dark-gradient {
+  color: #2c3e50;
+  background-image: -webkit-linear-gradient(358deg, #ff7600 0%, #974600 79%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 img {
   transition: all 0.5s;
   //animation: popup-keyframe 0.75s 0.5s backwards;
@@ -100,7 +112,7 @@ img {
   width: 45px;
 }
 
-//background
+// BACKGROUND 
 .bg-box {
   .box {
     content: "";
@@ -139,6 +151,9 @@ img {
   background-repeat: no-repeat;
   z-index: 0;
 }
+.bg-light-gradient {
+  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
 .bd-callout {
   padding: 1.25rem;
   background-color: $gray-100;
@@ -170,17 +185,17 @@ img {
   background-repeat: no-repeat, repeat, repeat;
   background-size: 100% 100%, 33px 33px, 33px 33px;
 }
-.overlay {
-  -webkit-transition: opacity 0.5s;
-  transition: opacity 0.5s;
+.overlay::before {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  content: "";
+  background: rgba(0, 0, 0, 0.25);
 }
 
-//buttons
+// BUTTONS
 /*.btn.btn-primary {
   border: var(--#{$prefix}btn-border-width) solid $black;
   cursor: pointer;
@@ -284,7 +299,7 @@ img {
   }
 }
 
-// Dialog
+// DIALOG POPUP
 dialog {
   width: 300px;
   background-color: $card-bg;
@@ -298,7 +313,7 @@ dialog.loading-dialog {
   background-color: $card-bg;
 }
 
-/*===== NAV BAR =====*/
+// NAV BAR HEADER
 .navbar {
   background: transparent !important;
   position: absolute;
@@ -306,10 +321,9 @@ dialog.loading-dialog {
   left: 0;
   right: 0;
   z-index: 3;
-  // padding-top: 30px;
   @include media-breakpoint-down(md) {
     backdrop-filter: saturate(200%) blur(30px);
-    background-color: hsl(0deg 0% 0% / 80%) !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     position: absolute;
     top: 0;
@@ -329,7 +343,6 @@ dialog.loading-dialog {
     }
   }
   .navbar-brand {
-    color: $white;
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
     &:hover,
@@ -344,7 +357,6 @@ dialog.loading-dialog {
   .navbar-nav {
     @include media-breakpoint-down(md) {
       padding-bottom: 20px;
-      // margin-left: 20px !important;
       margin-right: 0;
     }
     .nav-item {
@@ -402,7 +414,6 @@ dialog.loading-dialog {
           padding-right: 0;
           padding-bottom: 1rem;
           padding-top: 0;
-          color: $white;
         }
       }
 
@@ -428,15 +439,12 @@ dialog.loading-dialog {
           }
         }
         text-align: center;
-        .dropdown-toggle::after {
-          color: $white !important;
-        }
       }
     }
   }
   .navbar-toggler {
     border: none;
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: $black !important;
     cursor: pointer;
     padding-right: 0;
     text-transform: uppercase;
@@ -462,15 +470,11 @@ dialog.loading-dialog {
     top: 0;
     margin-top: -130px;
     backdrop-filter: saturate(200%) blur(30px);
-    background-color: hsl(0deg 0% 0% / 80%) !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     padding: 0 15px;
     .nav-item {
-      .dropdown-toggle::after {
-        color: $white !important;
-      }
       .nav-link {
-        color: $white !important;
         @include media-breakpoint-down(sm) {
           padding-left: 0 !important;
           padding-right: 0 !important;
@@ -495,7 +499,7 @@ dialog.loading-dialog {
 
     .navbar-toggler {
       border: none;
-      color: rgba(255, 255, 255, 0.5) !important;
+      color: $black !important;
       border-color: rgba(0, 0, 0, 0.5) !important;
       cursor: pointer;
       text-transform: uppercase;
@@ -524,7 +528,8 @@ dialog.loading-dialog {
     }
   }
 }
-// Troggle Menu
+
+// TROGGLE MENU ANIMATION
 .menu {
   background-color: transparent;
   border: none;
@@ -533,7 +538,7 @@ dialog.loading-dialog {
   padding: 0;
   .line {
     fill: none;
-    stroke: $white;
+    stroke: $black;
     stroke-width: 6;
     transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
       stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -566,7 +571,8 @@ dialog.loading-dialog {
     stroke-width: 6;
   }
 }
-// Bootstrap overwrite
+
+// BOOTSTRAP OVERWRITE
 .card {
   border: none;
   box-sizing: border-box;
@@ -584,15 +590,13 @@ dialog.loading-dialog {
   box-shadow: $box-shadow;
 }
 
-/*===== type write================================*/
+// TYPE WRITTER //
 .blinker {
   position: relative;
   border-right: 2px solid rgba(255, 255, 255, 0.75);
   white-space: nowrap;
   overflow: hidden;
 }
-
-/*===== Animation =====*/
 .anim-typewriter {
   animation: blinkTextCursor 1000ms steps(44) infinite normal;
 }
@@ -622,6 +626,7 @@ dialog.loading-dialog {
     opacity: 1;
   }
 }
+
 /** Utility */
 .nmb-md-5 {
   @include media-breakpoint-down(md) {
