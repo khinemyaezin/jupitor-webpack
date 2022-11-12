@@ -23,7 +23,6 @@ section.p-0 .container{
 }
 .hero-landing {
   padding: 9.5rem 0 4.75rem 0;
-  background-color: $orange-100;
   @include media-breakpoint-down(sm) {
     padding: 5rem 0 0 0;
     .hero-root {
