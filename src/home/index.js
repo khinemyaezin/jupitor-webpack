@@ -46,7 +46,7 @@ window.onload = async () => {
   prepareAbout(page?.section_about);
   prepareServices(page?.section_service);
   prepareGallery(page?.section_gallery);
-  createPartners(page?.section_partner);
+  //createPartners(page?.section_partner);
   prepreQuotation(page?.section_quotation, page?.contact);
   prepareFooter(page?.section_footer, page?.contact);
   runAos();
@@ -134,7 +134,7 @@ async function quote(event) {
 
 /** Sections */
 function prepareHero(hero, contact) {
-  $("#hero-landing #hero-carrier").text(hero.title);
+  $("#hero-landing #hero-carrier").html(hero.title);
   $("#hero-landing #hero-pitch").html(hero.pitch);
   new TxtType(document.getElementById("hero-name"), [
     contact.official,

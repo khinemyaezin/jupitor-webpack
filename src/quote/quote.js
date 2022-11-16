@@ -8,6 +8,7 @@ import {
   getStartOfDay,
   isEmptyOrSpaces,
   capitalizeName,
+  copyright,
 } from "../utility/main";
 import { FirebaseInit } from "../utility/firebase";
 import QuoteService from "../utility/quote-query";
@@ -23,6 +24,9 @@ const quoteService = new QuoteService(firebase);
 let filterDate = null;
 const operators = firebase.operators;
 let filterDropdown = null;
+
+copyright();
+
 
 window.onload = async () => {
   // Auth

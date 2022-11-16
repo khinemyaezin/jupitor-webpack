@@ -27,13 +27,13 @@ const pageSize = 10;
 export class FirebaseInit {
   // TODO: Replace the following with your app's Firebase project configuration
   firebaseConfig = {
-    apiKey: "AIzaSyCDkEotyALyyS3B8UU7KPrSKcQXjbdsTKQ",
-    authDomain: "jupitor2-webpack.firebaseapp.com",
-    projectId: "jupitor2-webpack",
-    storageBucket: "jupitor2-webpack.appspot.com",
-    messagingSenderId: "911670423800",
-    appId: "1:911670423800:web:ef40f37b4f33130015cb0d",
-    measurementId: "G-V4ZFBQ55HF",
+    apiKey: "AIzaSyDw6zS7MEkaO1uWvIRr44JfAuswjMGOfZE",
+    authDomain: "cablelocatorwithalex-d48ff.firebaseapp.com",
+    projectId: "cablelocatorwithalex-d48ff",
+    storageBucket: "cablelocatorwithalex-d48ff.appspot.com",
+    messagingSenderId: "36490701913",
+    appId: "1:36490701913:web:f0bb0256cf9e0e6e375548",
+    measurementId: "G-RRWZS61GQ2",
   };
   #app = null;
   #auth = null;
@@ -54,7 +54,7 @@ export class FirebaseInit {
         connectStorageEmulator(this.#storage, "localhost", 9199);
       }
     } catch (e) {
-      console.log('error on firebase init');
+      console.log("error on firebase init");
     }
   }
 

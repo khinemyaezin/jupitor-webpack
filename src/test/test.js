@@ -1,6 +1,5 @@
 
-import "jquery";
-
+import '../test/test.scss';
 (async function () {
 
 

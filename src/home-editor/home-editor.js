@@ -7,6 +7,7 @@ import {
   prepareMedia,
   loadingEl,
   dialog,
+  copyright,
 } from "../utility/main";
 import "bootstrap/js/dist/carousel";
 import "bootstrap/js/dist/collapse";
@@ -49,6 +50,9 @@ const processIcons = [
 let firebaseInit = new FirebaseInit();
 let storageQuery = new StorageQuery(firebaseInit);
 const el = loadingEl();
+
+copyright();
+
 
 window.onload = async () => {
   firebaseInit.watchUser((isAuth) => {
@@ -750,7 +754,7 @@ class Contact {
       official: "",
       nickname: "",
       auther: "Kyaw Thu Myint",
-      company: "Cable Detection",
+      company: "Cable Locator",
     };
     names.forEach((n, i) => {
       exp[name[i]] = n;
