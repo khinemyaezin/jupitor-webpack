@@ -31,7 +31,7 @@ window.onload = async () => {
   runHeaderControl();
   writeCopywrite();
 
-  const page = await downloadPage();
+  const page = require('../data-json/data.json');
   if (typeof page === "string" || Object.keys(page).length == 0) {
     dialog(
       "Sorry",
