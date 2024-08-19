@@ -9,14 +9,7 @@ class TxtType {
         this.isDeleting = false;
         this.callback = callback;
     }
-    /*var elements = document.getElementsByClassName("typewrite");
-    for (var i = 0; i < elements.length; i++) {
-        var toRotate = elements[i].getAttribute("data-type");
-        var period = elements[i].getAttribute("data-period");
-        if (toRotate) {
-            new TxtType(elements[i], JSON.parse(toRotate), period, null);
-        }
-    }*/
+   
     tick() {
         var i = this.loopNum % this.toRotate.length;
         var fullTxt = this.toRotate[i];

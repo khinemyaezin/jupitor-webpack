@@ -1,3 +1,0 @@
-https://themes.getbootstrap.com/preview/?theme_id=109460
-firebase emulators:start --import C:\Users\khine\Documents\Projects\FirebaseExport --export-on-exit C:\Users\khine\Documents\Projects\FirebaseExport
-firebase emulators:start --export-on-exit C:\Users\khine\Documents\Projects\FirebaseExport

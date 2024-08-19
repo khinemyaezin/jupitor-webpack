@@ -27,13 +27,13 @@ const pageSize = 10;
 export class FirebaseInit {
   // TODO: Replace the following with your app's Firebase project configuration
   firebaseConfig = {
-    apiKey: "AIzaSyDw6zS7MEkaO1uWvIRr44JfAuswjMGOfZE",
-    authDomain: "cablelocatorwithalex-d48ff.firebaseapp.com",
-    projectId: "cablelocatorwithalex-d48ff",
-    storageBucket: "cablelocatorwithalex-d48ff.appspot.com",
-    messagingSenderId: "36490701913",
-    appId: "1:36490701913:web:f0bb0256cf9e0e6e375548",
-    measurementId: "G-RRWZS61GQ2",
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: "",
   };
   #app = null;
   #auth = null;
